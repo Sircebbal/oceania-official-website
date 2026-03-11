@@ -1,0 +1,1811 @@
+/* ============================================================
+   ØCEANÍA — Main Stylesheet
+   FILE: styles.css
+   Shared across: index.html, bio.html, press.html, contact.html
+
+   STRUCTURE:
+   1.  CSS Custom Properties
+   2.  Reset & Base
+   3.  Film Grain Overlay
+   4.  Navigation
+   5.  Hero Section (index.html)
+   6.  Buttons
+   7.  Featured Single Section
+   8.  Band Intro Snippet
+   9.  Section Header (reusable)
+   10. Singles / Music Section
+   11. Tour Section
+   12. Cøntinent Section
+   13. Footer
+   14. Keyframe Animations
+   15. Scroll Reveal
+   16. Responsive / Media Queries
+   17. Page Hero (bio, press, contact)
+   18. Bio Page — Story, Members, Photos
+   19. Press Page — Story, EPK, Photos
+   20. Contact Form
+============================================================ */
+
+
+/* ============================================================
+   1. CSS CUSTOM PROPERTIES
+   — Edit these to retheme the entire site at once.
+   — Current palette: Racconto / Amber era.
+   — Original ocean/blue palette saved below as a comment.
+============================================================ */
+:root {
+  --color-bg:         #0a0703;
+  --color-surface:    #110d05;
+  --color-panel:      #181008;
+  --color-border:     rgba(240, 180, 80, 0.08);
+  --color-accent:     #e8921a;
+  --color-accent-dim: rgba(232, 146, 26, 0.15);
+  --color-text:       #f0e8d8;
+  --color-text-dim:   #907e62;
+  --color-text-faint: #3a2a10;
+
+  --font-display: 'Cormorant Garamond', Georgia, serif;
+  --font-body:    'Jost', sans-serif;
+
+  --space-xs: 8px;
+  --space-sm: 16px;
+  --space-md: 32px;
+  --space-lg: 64px;
+  --space-xl: 120px;
+
+  --transition-fast:   0.2s ease;
+  --transition-smooth: 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --transition-slow:   0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/*
+  ORIGINAL OCEAN / BLUE PALETTE — saved for future single switcher:
+  --color-bg:         #080a0f;
+  --color-surface:    #0d1018;
+  --color-panel:      #111520;
+  --color-border:     rgba(180, 200, 220, 0.08);
+  --color-accent:     #7eb8c9;
+  --color-accent-dim: rgba(126, 184, 201, 0.15);
+  --color-text:       #d4dde8;
+  --color-text-dim:   #5a6a7a;
+  --color-text-faint: #2a3a4a;
+*/
+
+
+/* ============================================================
+   2. RESET & BASE
+============================================================ */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  font-weight: 300;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+ul, ol { list-style: none; }
+a { text-decoration: none; color: inherit; }
+img { max-width: 100%; display: block; }
+
+
+/* ============================================================
+   3. FILM GRAIN OVERLAY
+   — Subtle texture rendered as an inline SVG data URI.
+   — Fixed so it covers the whole viewport at all times.
+   — z-index 9999 keeps it above everything else.
+============================================================ */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='grain'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23grain)' opacity='1'/%3E%3C/svg%3E");
+  opacity: 0.028;
+  pointer-events: none;
+  z-index: 9999;
+}
+
+
+/* ============================================================
+   4. NAVIGATION
+   — Fixed to top, fades from gradient to frosted glass on scroll.
+   — .nav-scrolled is toggled by script.js after 60px of scroll.
+   — .nav-active marks the current page link (add manually per page).
+   — .nav-cta is the bordered "call to action" link (e.g. Contact).
+============================================================ */
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  padding: 28px 48px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: linear-gradient(to bottom, rgba(8, 10, 15, 0.9) 0%, transparent 100%);
+  transition: padding var(--transition-fast), background var(--transition-fast);
+}
+
+.nav.nav-scrolled {
+  padding: 18px 48px;
+  background: rgba(8, 10, 15, 0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.nav-logo {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 400;
+  letter-spacing: 6px;
+  color: var(--color-text);
+  text-transform: uppercase;
+  transition: color var(--transition-fast);
+}
+
+.nav-logo:hover { color: var(--color-accent); }
+
+.nav-links {
+  display: flex;
+  gap: 36px;
+  align-items: center;
+}
+
+.nav-links a {
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--color-text-dim);
+  transition: color var(--transition-fast);
+  position: relative;
+}
+
+/* Animated underline on hover */
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--color-accent);
+  transition: width var(--transition-smooth);
+}
+
+.nav-links a:hover { color: var(--color-text); }
+.nav-links a:hover::after { width: 100%; }
+
+/* Bordered CTA button (e.g. "Contact") */
+.nav-links .nav-cta {
+  border: 1px solid var(--color-border);
+  padding: 8px 20px;
+  color: var(--color-text);
+  transition: border-color var(--transition-fast), color var(--transition-fast);
+}
+
+.nav-links .nav-cta::after { display: none; }
+
+.nav-links .nav-cta:hover {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+}
+
+/* Active page — add class="nav-active" to the current page link */
+.nav-links .nav-active {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+}
+
+
+/* ============================================================
+   5. HERO SECTION
+   — Full-viewport landing section on index.html only.
+   — .hero-bg holds the background photo (fades in on load).
+   — Content animates up with staggered delays via keyframes.
+   — Parallax effect is applied by script.js on scroll.
+============================================================ */
+.hero {
+  position: relative;
+  height: 100svh;
+  min-height: 600px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-start;
+  overflow: hidden;
+}
+
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  background: url('images/Banners/banner-main-racconto.jpg') center/cover no-repeat;
+  opacity: 0;
+  animation: fadeIn 2s 0.2s forwards;
+}
+
+/* Dark gradient overlay so text stays readable over the photo */
+.hero-bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(8, 10, 15, 1) 0%,
+    rgba(8, 10, 15, 0.4) 40%,
+    transparent 70%
+  );
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  padding: 0 48px var(--space-xl);
+  max-width: 900px;
+}
+
+.hero-eyebrow {
+  color: #fff;
+  opacity: 0.7;
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  animation: fadeSlideUp 1s 0.3s forwards;
+}
+
+.hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(70px, 12vw, 160px);
+  font-weight: 300;
+  line-height: 0.9;
+  letter-spacing: -1px;
+  color: var(--color-text);
+  opacity: 0;
+  animation: fadeSlideUp 1s 0.5s forwards;
+}
+
+.hero-subtitle {
+  font-family: var(--font-display);
+  font-size: clamp(18px, 3vw, 28px);
+  font-style: italic;
+  font-weight: 300;
+  color: var(--color-text-dim);
+  margin-top: 12px;
+  letter-spacing: 2px;
+  opacity: 0;
+  animation: fadeSlideUp 1s 0.7s forwards;
+}
+
+.hero-actions {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  margin-top: 40px;
+  opacity: 0;
+  animation: fadeSlideUp 1s 0.9s forwards;
+}
+
+.hero-line {
+  width: 60px;
+  height: 1px;
+  background: var(--color-accent);
+  opacity: 0.5;
+}
+
+/* Vertical "scroll" indicator, bottom-right corner */
+.hero-scroll {
+  position: absolute;
+  bottom: 40px;
+  right: 48px;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  opacity: 0;
+  animation: fadeIn 1s 1.4s forwards;
+}
+
+.hero-scroll span {
+  font-size: 9px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--color-text-dim);
+  writing-mode: vertical-rl;
+}
+
+.scroll-bar {
+  width: 1px;
+  height: 50px;
+  background: linear-gradient(to bottom, var(--color-accent), transparent);
+  animation: scrollPulse 2s ease-in-out infinite;
+}
+
+
+/* ============================================================
+   6. BUTTONS
+   — .btn-outline is the main CTA button used across all pages.
+============================================================ */
+.btn-outline {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 13px 30px;
+  border: 1px solid rgba(240, 180, 80, 0.3);
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--color-text);
+  cursor: pointer;
+  transition: border-color var(--transition-fast),
+              background  var(--transition-fast),
+              color       var(--transition-fast);
+}
+
+.btn-outline:hover {
+  border-color: var(--color-accent);
+  background: var(--color-accent-dim);
+  color: var(--color-accent);
+}
+
+
+/* ============================================================
+   7. FEATURED SINGLE SECTION
+   — Two-column layout: artwork left, info right.
+   — Used on index.html to spotlight the current single (Racconto).
+============================================================ */
+.featured-single {
+  padding: var(--space-xl) 48px;
+  background: var(--color-surface);
+  border-top: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.featured-single-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.single-artwork {
+  position: relative;
+  aspect-ratio: 1;
+  overflow: hidden;
+}
+
+/* Fallback gradient shown if artwork image is missing */
+.single-artwork-placeholder {
+  width: 100%;
+  height: 100%;
+  background:
+    radial-gradient(circle at 40% 60%, rgba(40, 100, 140, 0.3) 0%, transparent 60%),
+    radial-gradient(circle at 70% 30%, rgba(20, 50, 80, 0.4) 0%, transparent 50%),
+    linear-gradient(135deg, #0d1a28, #060c14, #0a1520);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--color-border);
+}
+
+.artwork-watermark {
+  font-family: var(--font-display);
+  font-size: 64px;
+  font-weight: 300;
+  letter-spacing: 8px;
+  color: rgba(126, 184, 201, 0.06);
+  text-transform: uppercase;
+  text-align: center;
+  user-select: none;
+}
+
+/* Corner accent decorations on the placeholder */
+.single-artwork-placeholder::before,
+.single-artwork-placeholder::after {
+  content: '';
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  border-color: rgba(126, 184, 201, 0.2);
+  border-style: solid;
+}
+
+.single-artwork-placeholder::before {
+  top: 16px;
+  left: 16px;
+  border-width: 1px 0 0 1px;
+}
+
+.single-artwork-placeholder::after {
+  bottom: 16px;
+  right: 16px;
+  border-width: 0 1px 1px 0;
+}
+
+.single-info {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* "New Single" pill with animated blinking dot */
+.single-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--color-accent);
+}
+
+.single-tag::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--color-accent);
+  animation: blink 2s ease-in-out infinite;
+}
+
+.single-title {
+  font-family: var(--font-display);
+  font-size: clamp(52px, 7vw, 90px);
+  font-weight: 300;
+  line-height: 0.95;
+  letter-spacing: 2px;
+  color: var(--color-text);
+}
+
+.single-title em {
+  font-style: italic;
+  color: var(--color-accent);
+}
+
+.single-meta {
+  font-size: 12px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--color-text-dim);
+}
+
+.single-description {
+  font-size: 16px;
+  line-height: 1.8;
+  color: var(--color-text-dim);
+  max-width: 420px;
+  font-weight: 300;
+}
+
+.single-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.stream-link {
+  display: inline-flex;
+  align-items: center;
+  padding: 10px 20px;
+  border: 1px solid var(--color-border);
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--color-text-dim);
+  transition: all var(--transition-fast);
+}
+
+.stream-link:hover {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+  background: var(--color-accent-dim);
+}
+
+
+/* ============================================================
+   8. BAND INTRO SNIPPET
+   — Centered section on index.html with diagonal text flow:
+     eyebrow pulls left → body centers → closer pulls right.
+   — Scroll reveal animations staggered (see section 15).
+============================================================ */
+.band-intro-section {
+  padding: var(--space-xl) 48px;
+  border-top: 1px solid var(--color-border);
+  text-align: center;
+}
+
+.band-intro-inner {
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+.band-intro-eyebrow {
+  font-size: 20px;
+  font-weight: 500;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  margin-bottom: 12px;
+  text-align: left;
+}
+
+.band-intro-body {
+  font-family: var(--font-display);
+  font-size: 30px;
+  font-style: italic;
+  font-weight: 300;
+  line-height: 1.8;
+  color: var(--color-text-dim);
+  margin-bottom: 32px;
+  max-width: 560px;
+}
+
+.band-intro-closer {
+  text-align: right;
+  font-size: 20px;
+  font-weight: 500;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  margin-top: 12px;
+}
+
+.band-intro-section .btn-outline {
+  padding: 16px 40px;
+  margin-top: 24px;
+}
+
+
+/* ============================================================
+   9. SECTION HEADER (reusable)
+   — Used above singles, tour, and other grid sections.
+============================================================ */
+.section-header { margin-bottom: 60px; }
+
+.section-eyebrow {
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  margin-bottom: 12px;
+}
+
+.section-title {
+  font-family: var(--font-display);
+  font-size: clamp(36px, 5vw, 64px);
+  font-weight: 300;
+  letter-spacing: 1px;
+  line-height: 1;
+  color: var(--color-text);
+}
+
+
+/* ============================================================
+   10. SINGLES / MUSIC SECTION
+   — Grid of square cards, one per release.
+   — Each card is wrapped in an <a> tag linking to the smart link.
+   — Default state: sepia/desaturated. Hover: full color.
+   — .single-card-tag is the "New!" / "Next Release" badge.
+============================================================ */
+.singles-section {
+  padding: var(--space-xl) 48px;
+  border-top: 1px solid var(--color-border);
+}
+
+.singles-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 2px;
+}
+
+.single-card {
+  position: relative;
+  aspect-ratio: 1;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.single-card-art {
+  width: 100%;
+  height: 100%;
+  transition: transform var(--transition-slow);
+}
+
+.single-card:hover .single-card-art { transform: scale(1.06); }
+
+/* Fallback gradient backgrounds — shown only if no <img> is present */
+.single-card:nth-child(1) .single-card-art {
+  background: radial-gradient(circle at 30% 70%, #0d2535, transparent 60%),
+              linear-gradient(135deg, #0a1a26, #06101a);
+}
+.single-card:nth-child(2) .single-card-art {
+  background: radial-gradient(circle at 70% 30%, #1a2030, transparent 55%),
+              linear-gradient(200deg, #0f1520, #080c14);
+}
+.single-card:nth-child(3) .single-card-art {
+  background: radial-gradient(circle at 50% 80%, #0d1e30, transparent 65%),
+              linear-gradient(45deg, #0a1825, #070e18);
+}
+.single-card:nth-child(4) .single-card-art {
+  background: radial-gradient(circle at 20% 40%, #152535, transparent 60%),
+              linear-gradient(100deg, #0c1a28, #080f1a);
+}
+
+/* Dark overlay fades in on hover, reveals the "Listen" text */
+.single-card-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(8, 10, 15, 0.95) 0%,
+    rgba(8, 10, 15, 0.3) 50%,
+    transparent 100%
+  );
+  opacity: 0;
+  transition: opacity var(--transition-smooth);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 28px;
+}
+
+.single-card:hover .single-card-overlay { opacity: 1; }
+
+/* Title + year label always visible at card bottom */
+.single-card-label {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 60px 24px 24px;
+  background: linear-gradient(to top, rgba(8, 10, 15, 0.9), transparent);
+}
+
+.single-card-year {
+  font-size: 10px;
+  letter-spacing: 3px;
+  color: var(--color-accent);
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+.single-card-name {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 400;
+  letter-spacing: 1px;
+  color: var(--color-text);
+}
+
+/* "Listen on Spotify →" slides up on hover */
+.single-card-listen {
+  font-size: 10px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  font-weight: 400;
+  margin-top: 10px;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity var(--transition-smooth), transform var(--transition-smooth);
+}
+
+.single-card:hover .single-card-listen {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* "New!" / "Next Release" badge — top-right corner of the card */
+.single-card-tag {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  padding: 6px 14px;
+  background: var(--color-accent);
+  color: var(--color-bg);
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+
+/* Artwork: desaturated by default, full colour on hover */
+.single-card-art img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  filter: sepia(100%) brightness(0.6);
+  transition: filter var(--transition-slow);
+}
+
+.single-card:hover .single-card-art img {
+  filter: sepia(0%) brightness(1);
+}
+
+
+/* ============================================================
+   11. TOUR SECTION
+   — When no dates are live, show .tour-tba.
+   — Individual .tour-row items are commented out in the HTML
+     until actual dates are booked.
+============================================================ */
+.tour-section {
+  padding: var(--space-xl) 48px;
+  background: var(--color-surface);
+  border-top: 1px solid var(--color-border);
+  text-align: center;
+}
+
+.tour-list { border-top: 1px solid var(--color-border); }
+
+/* Placeholder shown when no dates are booked */
+.tour-tba {
+  padding: 60px 0;
+  border-top: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
+  font-family: var(--font-display);
+  font-size: 24px;
+  font-style: italic;
+  font-weight: 300;
+  color: var(--color-text-dim);
+  letter-spacing: 1px;
+}
+
+.tour-row {
+  display: grid;
+  grid-template-columns: 140px 1fr auto;
+  align-items: center;
+  gap: var(--space-md);
+  padding: 28px 0;
+  border-bottom: 1px solid var(--color-border);
+  transition: background var(--transition-fast);
+  cursor: default;
+}
+
+.tour-row:hover {
+  background: rgba(240, 180, 80, 0.03);
+  padding-left: 12px;
+  transition: all var(--transition-fast);
+}
+
+.tour-row:hover .tour-ticket { opacity: 1; }
+
+.tour-date {
+  font-family: var(--font-display);
+  font-size: 36px;
+  font-weight: 300;
+  color: var(--color-accent);
+  line-height: 1;
+}
+
+.tour-date-month {
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--color-text-dim);
+  margin-top: 2px;
+}
+
+.tour-venue {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 400;
+  letter-spacing: 0.5px;
+  color: var(--color-text);
+}
+
+.tour-city {
+  font-size: 12px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--color-text-dim);
+  margin-top: 4px;
+}
+
+.tour-ticket {
+  padding: 10px 24px;
+  border: 1px solid var(--color-border);
+  font-size: 11px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--color-text);
+  font-family: var(--font-body);
+  cursor: pointer;
+  background: transparent;
+  opacity: 0.3;
+  transition: all var(--transition-fast);
+}
+
+.tour-ticket:hover {
+  background: var(--color-accent-dim);
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+  opacity: 1;
+}
+
+.tour-ticket.sold-out {
+  opacity: 0.3 !important;
+  cursor: not-allowed;
+  color: var(--color-text-dim);
+}
+
+.tour-ticket.sold-out:hover {
+  background: transparent;
+  border-color: var(--color-border);
+  color: var(--color-text-dim);
+}
+
+
+/* ============================================================
+   12. CØNTINENT SECTION
+   — Fan community section at the bottom of index.html.
+   — Ambient radial glow sits behind the title.
+   — Mailing list form is in the HTML, commented out until needed.
+============================================================ */
+.continent-section {
+  padding: var(--space-xl) 48px;
+  text-align: center;
+  border-top: 1px solid var(--color-border);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Ambient radial glow behind the title */
+.continent-section::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, var(--color-accent-dim) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.continent-inner {
+  position: relative;
+  z-index: 1;
+  max-width: 700px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+}
+
+.continent-eyebrow {
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  color: var(--color-accent);
+}
+
+.continent-title {
+  font-family: var(--font-display);
+  font-size: clamp(48px, 8vw, 100px);
+  font-weight: 300;
+  line-height: 1;
+  letter-spacing: 1px;
+  color: var(--color-text);
+}
+
+.continent-title em {
+  font-style: italic;
+  color: var(--color-accent);
+}
+
+.continent-sub {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 20px;
+  line-height: 1.8;
+  color: var(--color-text-dim);
+  font-weight: 300;
+}
+
+.continent-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.continent-link {
+  padding: 12px 28px;
+  border: 1px solid var(--color-border);
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--color-text-dim);
+  transition: all var(--transition-fast);
+}
+
+.continent-link:hover {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+  background: var(--color-accent-dim);
+}
+
+/* --- MAILING LIST (deactivated) ---
+   Uncomment the form block in index.html to activate.
+*/
+.continent-form {
+  display: flex;
+  gap: 0;
+  margin-top: 8px;
+}
+
+.continent-input {
+  padding: 13px 24px;
+  background: transparent;
+  border: 1px solid var(--color-border);
+  border-right: none;
+  color: var(--color-text);
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 300;
+  letter-spacing: 1px;
+  width: 280px;
+  outline: none;
+  transition: border-color var(--transition-fast);
+}
+
+.continent-input:focus { border-color: var(--color-accent); }
+.continent-input::placeholder { color: var(--color-text-faint); }
+
+.continent-btn {
+  padding: 13px 28px;
+  background: var(--color-accent);
+  border: 1px solid var(--color-accent);
+  color: var(--color-bg);
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.continent-btn:hover {
+  background: transparent;
+  color: var(--color-accent);
+}
+
+
+/* ============================================================
+   13. FOOTER
+============================================================ */
+footer {
+  padding: 60px 48px 40px;
+  border-top: 1px solid var(--color-border);
+  background: var(--color-bg);
+}
+
+.footer-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: var(--space-lg);
+}
+
+.footer-logo {
+  font-family: var(--font-display);
+  font-size: 36px;
+  font-weight: 300;
+  letter-spacing: 6px;
+  color: var(--color-text);
+}
+
+.footer-col h4 {
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  margin-bottom: 16px;
+}
+
+.footer-col a,
+.footer-col p {
+  display: block;
+  font-size: 13px;
+  font-weight: 300;
+  color: var(--color-text-dim);
+  margin-bottom: 8px;
+  letter-spacing: 1px;
+  transition: color var(--transition-fast);
+}
+
+.footer-col a:hover { color: var(--color-text); }
+
+.footer-bottom {
+  border-top: 1px solid var(--color-border);
+  padding-top: 28px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.footer-copy {
+  font-size: 11px;
+  color: var(--color-text-faint);
+  letter-spacing: 2px;
+}
+
+
+/* ============================================================
+   14. KEYFRAME ANIMATIONS
+============================================================ */
+@keyframes fadeSlideUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes scrollPulse {
+  0%, 100% { opacity: 0.3; transform: scaleY(1); }
+  50%       { opacity: 0.8; transform: scaleY(1.1); }
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.2; }
+}
+
+
+/* ============================================================
+   15. SCROLL REVEAL
+   — Elements start hidden and animate in when entering the viewport.
+   — script.js adds .revealed via IntersectionObserver.
+   — .reveal        → fade up
+   — .reveal-left   → fade from left
+   — .reveal-right  → fade from right
+   — .reveal-children → staggered fade up for child elements
+============================================================ */
+.reveal {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.reveal.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-left {
+  opacity: 0;
+  transform: translateX(-32px);
+  transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.reveal-right {
+  opacity: 0;
+  transform: translateX(32px);
+  transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.reveal-left.revealed,
+.reveal-right.revealed {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Staggered children — each child animates in with a slight delay */
+.reveal-children > * {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.reveal-children.revealed > *:nth-child(1) { opacity: 1; transform: none; transition-delay: 0s; }
+.reveal-children.revealed > *:nth-child(2) { opacity: 1; transform: none; transition-delay: 0.1s; }
+.reveal-children.revealed > *:nth-child(3) { opacity: 1; transform: none; transition-delay: 0.2s; }
+.reveal-children.revealed > *:nth-child(4) { opacity: 1; transform: none; transition-delay: 0.3s; }
+.reveal-children.revealed > *:nth-child(5) { opacity: 1; transform: none; transition-delay: 0.4s; }
+.reveal-children.revealed > *:nth-child(6) { opacity: 1; transform: none; transition-delay: 0.5s; }
+
+/* Custom cascade delays for Cøntinent section */
+.continent-eyebrow.reveal { transition-delay: 0s; }
+.continent-title.reveal   { transition-delay: 0.2s; }
+.continent-sub.reveal     { transition-delay: 0.4s; }
+.continent-links.reveal   { transition-delay: 0.6s; }
+
+/* Custom cascade delays for Band Intro section */
+.band-intro-eyebrow.reveal { transition-delay: 0s; }
+.band-intro-body.reveal    { transition-delay: 0.2s; }
+.band-intro-closer.reveal  { transition-delay: 0.6s; }
+
+
+/* ============================================================
+   16. RESPONSIVE / MEDIA QUERIES
+   — All breakpoint overrides in one place for easy maintenance.
+============================================================ */
+@media (max-width: 900px) {
+  .nav,
+  .nav.nav-scrolled { padding: 20px 24px; }
+
+  /* Nav links hidden on mobile — TODO: add hamburger menu */
+  .nav-links { display: none; }
+
+  .featured-single-inner {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .hero-content { padding: 0 24px 80px; }
+
+  .singles-section,
+  .tour-section,
+  .featured-single,
+  .band-intro-section,
+  .continent-section { padding: 80px 24px; }
+
+  .tour-row { grid-template-columns: 100px 1fr; }
+  .tour-ticket { display: none; }
+
+  .footer-top { flex-direction: column; gap: 32px; }
+  footer { padding: 48px 24px 32px; }
+  .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
+
+  /* Bio / press / contact pages */
+  .page-hero { padding: 120px 24px 60px; }
+  .page-hero::before { display: none; }
+  .bio-section { padding: 80px 24px; }
+  .two-col { grid-template-columns: 1fr; gap: 32px; }
+  .col-label { position: static; }
+  .members-grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); }
+  .photos-grid { grid-template-columns: 1fr 1fr; }
+  .press-photo:first-child { grid-row: span 1; }
+}
+
+@media (max-width: 600px) {
+  .form-row { grid-template-columns: 1fr; }
+  .form-submit { align-self: stretch; text-align: center; }
+}
+
+
+/* ============================================================
+   17. PAGE HERO
+   — Shared header used by bio.html, press.html, contact.html.
+   — Base class is always .page-hero.
+   — Page-specific variants (add to the same <header> element):
+       bio.html     → .bio-page-hero
+       press.html   → .press-page-hero
+       contact.html → .contact-page-hero
+   — The large decorative background text is generated via ::before.
+   — Default text is "BIO" — overridden per page variant below.
+   — Background image fades in on load via the fadeIn animation.
+   — Inner content (breadcrumb, title, sub) stagger up on load.
+============================================================ */
+.page-hero {
+  padding: 160px 48px 80px;
+  border-bottom: 1px solid var(--color-border);
+  position: relative;
+  overflow: hidden;
+  animation: fadeIn 1.2s ease forwards;
+}
+
+/* Default decorative background text */
+.page-hero::before {
+  content: 'BIO';
+  position: absolute;
+  right: -20px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-family: var(--font-display);
+  font-size: 280px;
+  font-weight: 300;
+  color: var(--color-text-faint);
+  letter-spacing: -10px;
+  user-select: none;
+  line-height: 1;
+  pointer-events: none;
+}
+
+.page-hero-inner {
+  max-width: 800px;
+  position: relative;
+  z-index: 1;
+}
+
+/* Staggered entrance animation for page hero content */
+.page-hero-inner .breadcrumb,
+.page-hero-inner .page-hero-title,
+.page-hero-inner .page-hero-sub {
+  opacity: 0;
+  animation: fadeSlideUp 0.8s forwards;
+}
+
+.page-hero-inner .breadcrumb      { animation-delay: 0.2s; }
+.page-hero-inner .page-hero-title { animation-delay: 0.4s; }
+.page-hero-inner .page-hero-sub   { animation-delay: 0.6s; }
+
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 32px;
+  font-size: 11px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--color-text-dim);
+}
+
+.breadcrumb a { transition: color var(--transition-fast); }
+.breadcrumb a:hover { color: var(--color-accent); }
+.breadcrumb-sep { color: var(--color-text-faint); }
+
+.page-hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(52px, 8vw, 100px);
+  font-weight: 300;
+  line-height: 0.9;
+  letter-spacing: 2px;
+  margin-bottom: 24px;
+}
+
+.page-hero-sub {
+  font-size: 15px;
+  font-weight: 300;
+  color: var(--color-text-dim);
+  letter-spacing: 1px;
+  max-width: 500px;
+  line-height: 1.7;
+}
+
+/* Bio page hero — crowd shot, fades to dark at bottom */
+.bio-page-hero {
+  background: url('images/Banners/banner-about.jpg') center 70%/cover no-repeat;
+  -webkit-mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
+  mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
+}
+
+.bio-page-hero::before { display: none; }
+
+/* Press page hero — Racconto cover art, fades to dark at bottom */
+.press-page-hero {
+  background: url('images/Banners/banner-press-racconto.jpg') center/cover no-repeat;
+  -webkit-mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
+  mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
+}
+
+.press-page-hero::before { display: none; }
+
+/* Contact page hero — decorative text override */
+.contact-page-hero::before { content: 'HI'; }
+
+
+/* ============================================================
+   18. BIO PAGE — STORY, MEMBERS, PHOTOS
+   — .bio-section wraps each content block on bio.html.
+   — .two-col is the sticky-label + content column layout.
+   — .photos-grid is the portrait grid for live show photos (3 col).
+   — .press-photo is shared with the press page photo grid.
+============================================================ */
+
+/* Section wrapper used on bio, press, and contact pages */
+.bio-section {
+  padding: var(--space-xl) 48px;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.bio-section:last-of-type { border-bottom: none; }
+
+/* Two-column layout: sticky label on left, content on right */
+.two-col {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 60px;
+  align-items: start;
+}
+
+.col-label {
+  position: sticky;
+  top: 100px;
+}
+
+.col-label-text {
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  padding-top: 4px;
+  border-left: 1px solid var(--color-accent);
+  padding-left: 16px;
+}
+
+/* Story text */
+.bio-text p {
+  font-size: 17px;
+  line-height: 1.9;
+  color: var(--color-text-dim);
+  margin-bottom: 24px;
+  max-width: 680px;
+  font-weight: 300;
+}
+
+/* First paragraph is a large italic display quote */
+.bio-text p:first-child {
+  font-size: 20px;
+  line-height: 1.8;
+  color: var(--color-text);
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-style: italic;
+}
+
+.bio-text strong {
+  color: var(--color-text);
+  font-weight: 500;
+}
+
+/* Members grid */
+.members-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 32px;
+}
+
+.member-card {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.member-photo {
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  position: relative;
+  background: var(--color-panel);
+  border: 1.5px solid var(--color-border);
+}
+
+.member-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+}
+
+/* Fallback gradient — shown if member photo is missing */
+.member-photo-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: flex-end;
+  padding: 16px;
+}
+
+.member-card:nth-child(1) .member-photo-placeholder {
+  background: radial-gradient(ellipse at 50% 30%, rgba(20, 50, 80, 0.6), rgba(8, 10, 15, 0.9));
+}
+.member-card:nth-child(2) .member-photo-placeholder {
+  background: radial-gradient(ellipse at 50% 30%, rgba(15, 40, 70, 0.6), rgba(8, 10, 15, 0.9));
+}
+
+.photo-hint {
+  font-size: 9px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--color-text-faint);
+}
+
+.member-name {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 400;
+  letter-spacing: 1px;
+  color: var(--color-text);
+}
+
+.member-role {
+  font-size: 11px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  margin-top: -10px;
+}
+
+.member-bio {
+  font-size: 13px;
+  line-height: 1.7;
+  color: var(--color-text-dim);
+  font-weight: 300;
+}
+
+/* Live photo grid — portrait orientation, 3 equal columns */
+.photos-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 4px;
+}
+
+.photos-grid .press-photo {
+  aspect-ratio: 2/3;
+}
+
+/* Individual photo tile — shared by both grids */
+.press-photo {
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+/* Hover overlay with download button */
+.press-photo-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(8, 10, 15, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity var(--transition-smooth);
+}
+
+.press-photo:hover .press-photo-overlay { opacity: 1; }
+
+.photo-download-hint {
+  font-size: 11px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--color-text);
+  border: 1px solid var(--color-border);
+  padding: 10px 20px;
+  background: rgba(8, 10, 15, 0.6);
+}
+
+.photos-note {
+  margin-top: 20px;
+  font-size: 12px;
+  letter-spacing: 2px;
+  color: var(--color-text-dim);
+}
+
+
+/* ============================================================
+   19. PRESS PAGE — STORY, EPK, PHOTOS
+   — .press-photos-grid is the landscape grid for promo shots.
+     Layout: 1 tall photo spanning 2 rows on the left, 4 landscape on the right.
+   — .story-now-section, .family-block, .press-quote are shared
+     with bio.html.
+   — EPK table (.epk-*) is press.html only.
+============================================================ */
+.story-now-section { background: var(--color-surface); }
+
+/* Extended family / alumni block */
+.family-block {
+  margin-top: 48px;
+  padding-top: 40px;
+  border-top: 1px solid var(--color-border);
+}
+
+.family-label {
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  margin-bottom: 16px;
+}
+
+.family-text {
+  font-size: 15px;
+  line-height: 1.8;
+  color: var(--color-text-dim);
+  font-weight: 300;
+  max-width: 600px;
+}
+
+.family-text strong {
+  color: var(--color-text);
+  font-weight: 500;
+}
+
+/* Pull quote — uncomment <blockquote> in bio/press HTML to activate */
+.press-quote {
+  border-left: 2px solid var(--color-accent);
+  padding-left: 24px;
+  margin: 32px 0;
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-style: italic;
+  font-weight: 300;
+  color: var(--color-text);
+  line-height: 1.6;
+}
+
+.press-quote cite {
+  display: block;
+  margin-top: 12px;
+  font-size: 11px;
+  font-style: normal;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--color-accent);
+}
+
+/* Press / promo photo grid — landscape, asymmetric */
+.press-photos-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: auto auto;
+  gap: 4px;
+}
+
+/* First photo spans both rows — tall feature image on the left */
+.press-photos-grid .press-photo:first-child {
+  grid-row: span 2;
+  aspect-ratio: 2/3;
+}
+
+/* Remaining 4 photos — landscape */
+.press-photos-grid .press-photo:not(:first-child) {
+  aspect-ratio: 4/3;
+}
+
+.press-photos-grid .press-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.press-photos-intro {
+  font-size: 13px;
+  font-weight: 300;
+  color: var(--color-text-dim);
+  font-style: italic;
+  margin-bottom: 28px;
+  letter-spacing: 0.3px;
+}
+
+/* EPK / One Sheet */
+.epk-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+}
+
+.epk-block {
+  padding-bottom: 48px;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.epk-block:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.epk-label {
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  margin-bottom: 20px;
+}
+
+.epk-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.epk-table tr { border-bottom: 1px solid var(--color-border); }
+.epk-table tr:last-child { border-bottom: none; }
+
+.epk-key {
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--color-text-dim);
+  padding: 12px 24px 12px 0;
+  white-space: nowrap;
+  width: 130px;
+  vertical-align: top;
+}
+
+.epk-val {
+  font-size: 14px;
+  font-weight: 300;
+  color: var(--color-text);
+  padding: 12px 0;
+  line-height: 1.6;
+}
+
+.epk-link {
+  color: var(--color-accent);
+  font-size: 12px;
+  letter-spacing: 1px;
+  transition: opacity var(--transition-fast);
+}
+
+.epk-link:hover { opacity: 0.7; }
+
+.epk-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.epk-pill {
+  padding: 8px 20px;
+  border: 1px solid var(--color-border);
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--color-text-dim);
+  transition: all var(--transition-fast);
+}
+
+.epk-pill:hover {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+}
+
+.epk-rider-note {
+  font-size: 13px;
+  font-weight: 300;
+  color: var(--color-text-dim);
+  font-style: italic;
+  margin-bottom: 20px;
+  line-height: 1.7;
+}
+
+
+/* ============================================================
+   20. CONTACT FORM
+   — Powered by Formspree.
+   — Replace YOUR_FORM_ID in the <form action> in contact.html.
+============================================================ */
+.contact-form-intro {
+  font-size: 16px;
+  line-height: 1.8;
+  color: var(--color-text-dim);
+  font-weight: 300;
+  margin-bottom: 40px;
+  max-width: 520px;
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 620px;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-label {
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--color-accent);
+}
+
+.form-input {
+  background: transparent;
+  border: 1px solid var(--color-border);
+  padding: 14px 18px;
+  color: var(--color-text);
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 300;
+  letter-spacing: 0.5px;
+  outline: none;
+  transition: border-color var(--transition-fast);
+  width: 100%;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.form-input:focus { border-color: var(--color-accent); }
+.form-input::placeholder { color: var(--color-text-faint); }
+
+/* Custom dropdown arrow */
+.form-select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%237a6a50' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 16px center;
+  cursor: pointer;
+}
+
+.form-select option {
+  background: var(--color-panel);
+  color: var(--color-text);
+}
+
+.form-textarea {
+  resize: vertical;
+  min-height: 140px;
+  line-height: 1.6;
+}
+
+.form-submit {
+  align-self: flex-start;
+  padding: 14px 36px;
+  background: transparent;
+  border: 1px solid var(--color-accent);
+  color: var(--color-accent);
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background var(--transition-fast), color var(--transition-fast);
+  margin-top: 8px;
+}
+
+.form-submit:hover {
+  background: var(--color-accent);
+  color: var(--color-bg);
+}
+
+.form-feedback {
+  font-size: 13px;
+  letter-spacing: 1px;
+  line-height: 1.7;
+  font-weight: 300;
+  padding: 20px 24px;
+  border-left: 2px solid;
+  margin-top: 8px;
+}
+
+.form-feedback--success {
+  color: var(--color-text);
+  border-color: var(--color-accent);
+}
+
+.form-feedback--error {
+  color: #c0604a;
+  border-color: #c0604a;
+}

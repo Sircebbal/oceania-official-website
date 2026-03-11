@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<!--
+  ============================================================
+  ØCEANÍA — Bio / Press Page
+  FILE: bio.html
+  ============================================================
+
+  PAGE STRUCTURE:
+  1. <head>             → Meta tags, fonts, linked stylesheet
+  2. <nav>              → Fixed navigation bar
+  3. .page-hero         → Title banner
+  4. #story-so-far      → The Story So Far — band history
+  5. #story-right-now   → The Story Right Now — current chapter / press
+  6. #members           → Cris & Jadiel + the extended family
+  7. #photos            → Press photo gallery
+  8. #contact           → Booking and press contacts
+  9. <footer>           → Footer
+
+  LINKED FILES:
+  - styles.css  → all visual styles
+  - script.js   → nav scroll + reveal animations
+  ============================================================
+-->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="ØCEANÍA — The story of Cris Labbé and Jadiel Lutto. Bio, press, and contact.">
+  <title>ØCEANÍA — About</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- ============================================================
+       NAVIGATION
+       Same structure as index.html.
+       "nav-active" highlights the current page.
+  ============================================================ -->
+  <nav class="nav" id="main-nav">
+    <a href="index.html" class="nav-logo">ØCEANÍA</a>
+    <ul class="nav-links">
+      <li><a href="index.html#single">Single</a></li>
+      <li><a href="index.html#music">Music</a></li>
+      <li><a href="index.html#tour">Tour</a></li>
+      <li><a href="bio.html" class="nav-cta nav-active">About</a></li>
+      <li><a href="press.html" class="nav-cta">Press</a></li>
+      <li><a href="contact.html" class="nav-cta">Contact</a></li>
+    </ul>
+  </nav>
+
+
+  <!-- ============================================================
+       PAGE HERO / TITLE BANNER
+  ============================================================ -->
+  <header class="page-hero bio-page-hero">
+    <div class="page-hero-inner">
+
+      <div class="breadcrumb">
+        <a href="index.html">Home</a>
+        <span class="breadcrumb-sep">/</span>
+        <span>About</span>
+      </div>
+
+      <h1 class="page-hero-title">About <br> ØCEANÍA</h1>
+
+      <p class="page-hero-sub">
+        The story of ØCEANÍA — where they come from,
+        where they are, and where they're going.
+      </p>
+
+    </div>
+  </header>
+
+<!-- ============================================================
+       SECTION 3: THE MEMBERS
+       ============================================================
+       TO ADD PHOTOS — replace .member-photo-placeholder with:
+       <img src="images/cris.jpg" alt="Cris Labbé">
+  ============================================================ -->
+  <section class="bio-section" id="members">
+    <div class="two-col reveal">
+
+      <div class="col-label">
+        <p class="col-label-text">Members</p>
+      </div>
+
+      <div>
+        <div class="members-grid">
+
+          <!-- CRIS LABBÉ -->
+          <div class="member-card">
+            <div class="member-photo">
+              <img src="images/Members/member-cris-racconto.jpg" alt="Cris Labbé">
+              <div class="member-photo-placeholder">
+              </div>
+            </div>
+            <p class="member-name">Cris Labbé</p>
+            <p class="member-role">Vocals / Guitar</p>
+            <p class="member-bio">
+              Songwriter, vocalist, guitarist. The creative anchor
+              of ØCEANÍA since its first days — the one who kept
+              the band moving when everything else paused.
+            </p>
+          </div>
+
+          <!-- JADIEL LUTTO -->
+          <div class="member-card">
+            <div class="member-photo">
+                <img src="images/Members/member-jadiel-racconto.jpg" alt="Jadiel Lutto">
+              <div class="member-photo-placeholder">
+                <p class="photo-hint"></p>
+              </div>
+            </div>
+            <p class="member-name">Jadiel Lutto</p>
+            <p class="member-role">Drums</p>
+            <p class="member-bio">
+              Friends with Cris since 2014. Stepped away,
+              came back, and completed the seal. The heartbeat
+              of the live show.
+            </p>
+          </div>
+
+        </div>
+      </section>
+  
+
+  <!-- ============================================================
+       SECTION 1: THE STORY SO FAR
+       ============================================================
+       The full band history.
+       Named as a nod to The Story So Far — intentional reference.
+       Update this as the band's history grows.
+  ============================================================ -->
+  <section class="bio-section" id="story-so-far">
+    <div class="two-col reveal">
+
+      <div class="col-label">
+        <p class="col-label-text">The Story So Far</p>
+      </div>
+
+      <div class="bio-text">
+
+        <!-- Opening pull quote — the emotional core -->
+        <p>
+          ØCEANÍA was never just a band. It was always a circle
+          of friends finding their way back to each other.
+        </p>
+
+        <p>
+          <strong>Cris Labbé</strong> and <strong>Jadiel Lutto</strong>
+          have been friends since 2014, bound together by a shared
+          obsession with music. Their early years were spent playing
+          covers — Yellowcard, All Time Low, Blink-182 — learning
+          what it meant to play together, to listen, to trust.
+        </p>
+
+        <p>
+          By 2017, Cris wanted to record a demo of an early song,
+          <em>Ayer</em>. Jadiel stepped in to engineer the session
+          and recorded the drums on the spot, learning the song in
+          real time. That same year, long-time friend
+          <strong>Fer Velasco</strong> — met at a jam session in 2016 —
+          joined on bass. The three began writing together in earnest:
+          <em>D.F., Imperios, Constelación, Cuervos</em>. A sound
+          was taking shape — progressive, searching, unafraid.
+        </p>
+
+        <p>
+          When Jadiel stepped away in 2018, <strong>Rai Pinto</strong>
+          filled the drum chair, and the band pushed further —
+          into nu-metal, into darkness, into something heavier and
+          more alternative. They played their first gigs. They found
+          out what an ØCEANÍA live show could be: charisma, energy,
+          adrenaline, and a connection with the audience that felt
+          almost inexplicable.
+        </p>
+
+        <p>
+          They released the EP <strong>Inmersión</strong>, containing
+          <em>D.F.</em> and <em>Constelación</em>. Then came
+          <em>Cuervos</em> — and their first international appearance,
+          a livestream for the Mexican festival
+          <strong>El Rock es Cultura</strong>.
+        </p>
+
+        <p>
+          The pandemic paused everything. Fer and Rai pursued their
+          own projects — <em>Vestya</em> and <em>Matar a Grax / Yaman Sapodrido</em>
+          respectively — while Cris kept the band moving. <em>Ayer</em>
+          was finally released in 2021.
+        </p>
+
+        <p>
+          By 2023, the world reopened. <strong>Manu Guzmán</strong>
+          joined for a season — guitar and backing vocals — before
+          leaving for Australia. And then Jadiel came back.
+          The circle was complete.
+        </p>
+
+        <p>
+          Fer, Rai, Manu — they are not former members.
+          They are the Cøntinent. They shaped this sound.
+          They are family.
+        </p>
+
+      </div>
+    </div>
+  </section>
+
+
+  
+
+  
+
+
+  <!-- ============================================================
+       SECTION 4: PRESS PHOTOS
+       ============================================================
+       TO USE REAL PHOTOS — replace .press-photo-inner with:
+       <img src="images/press-1.jpg" alt="ØCEANÍA" style="width:100%;height:100%;object-fit:cover;">
+  ============================================================ -->
+  <section class="bio-section" id="photos">
+    <div class="two-col reveal">
+
+      <div class="col-label">
+        <p class="col-label-text">Press Photos</p>
+      </div>
+
+      <div>
+        <div class="photos-grid">
+
+          <div class="press-photo">
+            <img src="images/Live/live-oceania-1.jpeg" alt="ØCEANÍA" style="width:100%;height:100%;object-fit:cover;">
+            <div class="press-photo-overlay">
+              <a href="images/Live/live-oceania-1.jpeg" class="photo-download-hint" download>Download ↓</a>
+            </div>
+          </div>
+
+          <div class="press-photo">
+            <img src="images/Live/live-oceania-2.jpeg" alt="ØCEANÍA" style="width:100%;height:100%;object-fit:cover;">
+            <div class="press-photo-overlay">
+              <a href="images/Live/live-oceania-2.jpeg" class="photo-download-hint" download>Download ↓</a>
+            </div>
+          </div>
+
+          <div class="press-photo">
+            <img src="images/Live/live-oceania-3.jpeg" alt="ØCEANÍA" style="width:100%;height:100%;object-fit:cover;">
+            <div class="press-photo-overlay">
+              <a href="images/Live/live-oceania-3.jpeg" class="photo-download-hint" download>Download ↓</a>
+            </div>
+          </div>
+
+          <div class="press-photo">
+            <img src="images/Live/live-oceania-4.jpeg" alt="ØCEANÍA" style="width:100%;height:100%;object-fit:cover;">
+            <div class="press-photo-overlay">
+              <a href="images/Live/live-oceania-4.jpeg" class="photo-download-hint" download>Download ↓</a>
+            </div>
+          </div>
+
+          <div class="press-photo">
+            <img src="images/Live/live-oceania-5.jpeg" alt="ØCEANÍA" style="width:100%;height:100%;object-fit:cover;">
+            <div class="press-photo-overlay">
+              <a href="images/Live/live-oceania-5.jpeg" class="photo-download-hint" download>Download ↓</a>
+            </div>
+          </div>
+
+             <div class="press-photo">
+            <img src="images/Live/live-oceania-6.jpeg" alt="ØCEANÍA" style="width:100%;height:100%;object-fit:cover;">
+            <div class="press-photo-overlay">
+              <a href="images/Live/live-oceania-6.jpeg" class="photo-download-hint" download>Download ↓</a>
+            </div>
+          </div>
+
+        </div>
+
+        <p class="photos-note">
+          For hi-res files, contact press@oceania.com
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+
+
+  <!-- ============================================================
+       SECTION 5: CONTACT CTA
+       Form lives on contact.html
+  ============================================================ -->
+  <section class="bio-section" id="contact">
+    <div class="two-col reveal">
+
+      <div class="col-label">
+        <p class="col-label-text">Contact</p>
+      </div>
+
+      <div>
+        <p class="contact-form-intro">
+          Booking, press, collabs, or just want to say something —
+          we read everything.
+        </p>
+        <a href="contact.html" class="btn-outline">Get in touch →</a>
+      </div>
+
+    </div>
+  </section>
+
+
+
+   <!-- ============================================================
+       FOOTER
+  ============================================================ -->
+  <footer>
+    <div class="footer-top">
+
+      <!-- Band name / logo -->
+      <div class="footer-logo">ØCEANÍA</div>
+
+      <!-- Navigation column -->
+      <div class="footer-col">
+        <h4>Navigate</h4>
+        <a href="#single">New Single</a>
+        <a href="#music">Music</a>
+        <a href="#tour">Tour</a>
+        <!-- Link to the separate bio page -->
+        <a href="bio.html">Bio</a>
+        <a href="press.html">Press</a>
+      </div>
+
+      <!-- Social links column -->
+      <!-- Replace # with your actual social media profile URLs -->
+      <div class="footer-col">
+        <h4>Follow</h4>
+        <a href="https://www.instagram.com/oceania_banda/" target="_blank" rel="noopener">Instagram</a>
+        <a href="https://open.spotify.com/artist/15QX2MFDLf2Owsq7GIjmwU" target="_blank" rel="noopener">Spotify</a>
+        <a href="https://www.youtube.com/channel/UCTxrDLlP-fS4F4I4i0163rA" target="_blank" rel="noopener">YouTube</a>
+        <a href="https://www.tiktok.com/@oceania_music" target="_blank" rel="noopener">TikTok</a>
+      </div>
+
+      <!-- Contact column -->
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <!-- Replace with real email addresses -->
+        <a href="mailto:dahlia.ruizvera@gmail.com">Booking</a>
+      </div>
+
+    </div>
+
+    <!-- Bottom bar: copyright + tagline -->
+    <div class="footer-bottom">
+      <p class="footer-copy">© 2026 ØCEANÍA. All rights reserved.</p>
+      <p class="footer-copy">sounds from the in-between</p>
+    </div>
+
+  </footer>
+  <script src="script.js"></script>
+</body>
+</html>

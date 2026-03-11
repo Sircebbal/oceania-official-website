@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<!--
+  ============================================================
+  ØCEANÍA — Official Website
+  FILE: index.html (Main Page)
+  ============================================================
+
+  PAGE STRUCTURE:
+  1. <head>         → Meta tags, fonts, linked stylesheet
+  2. <nav>          → Fixed navigation bar (top of every page)
+  3. #hero          → Full-screen landing section
+  4. #new-single    → Featured single "Racconto" (spotlight section)
+  5. #singles       → All singles / music grid
+  6. #tour          → Upcoming live dates
+  7. <footer>       → Links, socials, copyright
+
+  HOW THE TWO PAGES CONNECT:
+  - index.html  → links to bio.html via the nav "Bio" link
+  - bio.html    → links back to index.html via the nav logo/home link
+  Both pages share the same CSS variables and nav styling for consistency.
+  ============================================================
+-->
+<html lang="en">
+<head>
+  <!-- ── META TAGS ──────────────────────────────────────────
+       These tell the browser and search engines basic info.
+       charset="UTF-8" supports special chars like Ø and Í.
+       viewport makes the site responsive on mobile devices.
+  ─────────────────────────────────────────────────────────── -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="ØCEANÍA — Official Website. New single Racconto out now.">
+  <title>ØCEANÍA — Official Site</title>
+
+  <!-- ── GOOGLE FONTS ───────────────────────────────────────
+       We import two font families:
+       - "Cormorant Garamond": elegant serif for headlines.
+         Cinematic, editorial — feels like a film title card.
+       - "Jost": clean geometric sans for body text & UI.
+         Readable at small sizes, modern but not sterile.
+
+       The URL fetches both in one request (efficient!).
+       font-display=swap means text shows in fallback font
+       while the custom font loads (avoids invisible text).
+  ─────────────────────────────────────────────────────────── -->
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+
+
+</head>
+<body>
+
+  <!-- ============================================================
+       NAVIGATION BAR
+       ============================================================
+       position: fixed in CSS keeps this visible while scrolling.
+       The "nav-scrolled" class is added via JS on scroll.
+
+       LOGO: Links back to top of this page (#home anchor)
+       LINKS: Internal anchors + link to bio.html (separate page)
+  ============================================================ -->
+  <nav class="nav" id="main-nav">
+    <!-- Logo / band name — clicking returns to top of page -->
+    <a href="#home" class="nav-logo">ØCEANÍA</a>
+
+    <!-- Navigation links -->
+    <ul class="nav-links">
+      <li><a href="#single">Single</a></li>
+      <li><a href="#music">Music</a></li>
+      <li><a href="#tour">Tour</a></li>
+      <!-- bio.html is a separate HTML file in the same folder -->
+      <li><a href="bio.html" class="nav-cta">About</a></li>
+      <li><a href ="press.html">Press</a></li>
+      <li><a href="contact.html">Contact</li>
+    </ul>
+  </nav>
+
+
+  <!-- ============================================================
+       HERO SECTION
+       ============================================================
+       id="home" allows the nav logo to link here with href="#home".
+       Full-screen landing with band name and CTA.
+  ============================================================ -->
+  <section class="hero" id="home">
+
+    <!-- Background: swap gradient for your actual hero photo -->
+    <div class="hero-bg"></div>
+
+    <!-- Centered bottom-left content block -->
+    <div class="hero-content">
+      <p class="hero-eyebrow">New Single — Racconto — Out Now</p>
+
+      <!-- Band name — the centerpiece -->
+      <h1 class="hero-title">ØCEANÍA</h1>
+
+      <!-- Tagline — change to whatever fits the band -->
+      <p class="hero-subtitle">sounds from the in-between</p>
+
+      <!-- CTA row: decorative line + button -->
+      <div class="hero-actions">
+        <div class="hero-line"></div>
+        <!-- href="#single" scrolls to the featured single section -->
+        <a href="#single" class="btn-outline">
+          Listen to Racconto
+          <!-- Arrow character — no icon library needed -->
+          <span>↓</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Scroll indicator (bottom-right) -->
+    <div class="hero-scroll">
+      <div class="scroll-bar"></div>
+      <span>Scroll</span>
+    </div>
+
+  </section>
+
+
+  <!-- ============================================================
+       FEATURED SINGLE — "RACCONTO"
+       ============================================================
+       id="single" is the scroll target from hero CTA and nav.
+       Two-column: artwork (left) + info (right).
+
+       TO ADD REAL ARTWORK:
+       Replace .single-artwork-placeholder with:
+       <img src="images/racconto.jpg" alt="Racconto - ØCEANÍA">
+  ============================================================ -->
+  <section class="featured-single" id="single">
+    <div class="featured-single-inner">
+
+      <!-- Left: artwork -->
+      <div class="single-artwork reveal">
+        <!--
+          PLACEHOLDER — replace this div with an <img> tag:
+          
+        -->
+          <img src="images/Artwork/artwork-racconto.jpg" alt="Racconto cover art">
+        <div class="single-artwork-placeholder">
+          <p class="artwork-watermark">Racconto</p>
+        </div>
+      </div>
+
+      <!-- Right: text info -->
+      <div class="single-info reveal">
+
+        <!-- "New Single" label with blinking dot -->
+        <p class="single-tag">New Single</p>
+
+        <!-- Single title — "em" makes "Racconto" italic -->
+        <h2 class="single-title"><em>Racconto</em></h2>
+
+        <!-- Release metadata -->
+        <p class="single-meta">ØCEANÍA · 2026 · Single</p>
+
+        <!-- Short description — edit this text -->
+        <p class="single-description">
+          A slow unraveling. Racconto moves between silences and surges,
+          tracing the memory of something you can't quite name.
+          Available now on all platforms.
+        </p>
+
+        <!-- Streaming platform links -->
+        <!-- Replace # with actual URLs to your song on each platform -->
+        <div class="single-links">
+          <a href="https://open.spotify.com/track/33ungDjuzHjI2LNTwvF4bT?si=02ef47fc71c14719" target="_blank" rel="noopener" class="stream-link">Spotify</a>
+          <a href="https://music.apple.com/cl/song/racconto/1856874167" target="_blank" rel="noopener" class="stream-link">Apple Music</a>
+          <a href="https://music.youtube.com/watch?v=si8luPrj7yw&si=RwOKBximUVob_cQO" target="_blank" rel="noopener" class="stream-link">YouTube</a>
+          <a href="#" class="stream-link">Bandcamp</a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+     BAND INTRO SNIPPET
+     Brief who-we-are, links to full bio page.
+============================================================ -->
+<section class="band-intro-section">
+  <div class="band-intro-inner">
+
+    <div class="band-intro-text">
+      <p class="band-intro-eyebrow reveal-left">From the depths of the ocean...</p>
+      <h2 class="band-intro-title"></h2>
+      <p class="band-intro-body reveal" style="transition-delay: 0.2s;">
+        A duo from Chile. Cinematic, restless, unafraid.
+        Built on friendship, shaped by everyone who ever
+        shared a stage with them. Their live show doesn't
+        feel like two people — it feels like a band.
+      </p>
+         <p class="band-intro-closer reveal-right" style="transition-delay: 0.6s;">...into the vastness of space </p>
+      <div style="display:flex; justify-content:center;" class="reveal" style="transition-delay: 0.4s;">
+      <a href="bio.html" class="btn-outline">
+        Read the full story →
+      </a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+  <!-- ============================================================
+       SINGLES / MUSIC SECTION
+       ============================================================
+       id="music" is the nav scroll target.
+       Grid of previous singles with hover interactions.
+
+       ADDING MORE SINGLES:
+       Copy one .single-card block and update the text/image.
+       The CSS nth-child rules auto-assign gradient placeholders
+       for the first 4 — add more for additional cards.
+  ============================================================ -->
+  <section class="singles-section" id="music">
+
+    <!-- Section header -->
+    <div class="section-header reveal">
+      <p class="section-eyebrow">Discography</p>
+      <h2 class="section-title">Singles</h2>
+    </div>
+
+    <!-- Singles grid -->
+    <div class="singles-grid reveal-children">
+
+      <!-- SINGLE CARD 1 -->
+      <!-- TO USE REAL ART: add style="background: url('images/single.jpg') center/cover" to .single-card-art -->
+       <a href="https://song.link/your-link" target="_blank" rel="noopener">
+      <div class="single-card">
+        <div class="single-card-art">
+
+        </div>
+        <div class="single-card-overlay">
+          <p class="single-card-listen"></p> </p>
+        </div>
+          <div class="single-card-tag">Next Release</div>
+        <div class="single-card-label">
+          <p class="single-card-year">2026</p>
+          <p class="single-card-name">D.F.</p>
+        </div>
+      </div>
+    </a>
+      
+
+      <!-- SINGLE CARD 2 -->
+      <a href="https://distrokid.com/hyperfollow/ceana/racconto" target="_blank" rel="noopener">
+      <div class="single-card">
+        <div class="single-card-art">
+          <img src="images/Artwork/artwork-racconto.jpg" alt="Racconto Single Artwork">
+        </div>
+         <div class="single-card-tag">New!</div>
+        <div class="single-card-overlay">
+          <p class="single-card-listen"></p>
+        </div>
+        <div class="single-card-label">
+          <p class="single-card-year">2025</p>
+          <!-- Replace with your actual single name -->
+          <p class="single-card-name">Racconto</p>
+        </div>
+      </div>
+      </a>
+
+      <!-- SINGLE CARD 3 -->
+       <a href="https://distrokid.com/hyperfollow/ceana/imperios-2" target="_blank" rel="noopener">
+      <div class="single-card">
+        <div class="single-card-art">
+          <img src="images/Artwork/artwork-imperios.jpg" alt="Imperios Singler Artwork">
+        </div>
+        <div class="single-card-overlay">
+          <p class="single-card-listen"></p>
+        </div>
+        <div class="single-card-label">
+          <p class="single-card-year">2025</p>
+          <p class="single-card-name">Imperios</p>
+        </div>
+      </div>
+      </a>
+
+      <!-- SINGLE CARD 4 -->
+       <a href="https://distrokid.com/hyperfollow/ceana/constelacin-2" target="_blank" rel="noopener">
+      <div class="single-card">
+        <div class="single-card-art">
+          <img src="images/Artwork/artwork-constelacion.jpg" alt="Constelación Single Artwork">
+        </div>
+        <div class="single-card-overlay">
+          <p class="single-card-listen"></p>
+        </div>
+        <div class="single-card-label">
+          <p class="single-card-year">2025</p>
+          <p class="single-card-name">Constelación</p>
+        </div>
+      </div>
+      </a>
+
+    </div><!-- /singles-grid -->
+  </section>
+
+
+  <!-- ============================================================
+       TOUR / LIVE DATES SECTION
+       ============================================================
+       Each .tour-row is one show.
+       The ticket button fades in on hover (CSS handles this).
+
+       ADDING/REMOVING SHOWS:
+       Copy a .tour-row block. Update date, venue, city.
+       For sold-out shows, add class="tour-ticket sold-out" to the button.
+  ============================================================ -->
+  <section class="tour-section" id="tour">
+
+    <div class="section-header reveal">
+      <p class="section-eyebrow">Live</p>
+      <h2 class="section-title">Tour Dates</h2>
+    </div>
+
+    <div class="tour-list">
+      <div class="tour-tba">
+      <p>No dates yet — to be announced.</p>
+      </div>
+      
+
+    </div><!-- /tour-list -->
+  </section>
+<!-- ============================================================
+     "BE PART OF THE CØNTINENT" — Fan community section
+     Social links to join the community.
+============================================================ -->
+<section class="continent-section reveal">
+
+  <div class="continent-inner reveal">
+
+    <p class="continent-eyebrow reveal">The Community</p>
+
+    <h2 class="continent-title reveal">Be part of the<br><em>Cøntinent</em></h2>
+
+    <p class="continent-sub reveal">
+      Join a place where you can fully grow into yourself.<br>
+      Join the Cøntinent.
+    </p>
+
+    <!-- Social links -->
+    <div class="continent-links">
+      <a href="https://www.instagram.com/oceania_banda/" class="continent-link" target="_blank" rel="noopener">Instagram</a>
+      <a href="https://open.spotify.com/artist/15QX2MFDLf2Owsq7GIjmwU" class="continent-link" target="_blank" rel="noopener">Spotify</a>
+      <a href="https://www.youtube.com/channel/UCTxrDLlP-fS4F4I4i0163rA" class="continent-link" target="_blank" rel="noopener">YouTube</a>
+      <a href="https://www.tiktok.com/@oceania_music" class="continent-link" target="_blank" rel="noopener">TikTok</a>
+    </div>
+
+    <!-- ============================================================
+         MAILING LIST — Deactivated, placeholder for future use
+         To activate:
+         1. Uncomment the block below
+         2. Connect to Mailchimp / Klaviyo / any email service
+         3. Replace the form action URL with your list endpoint
+    ============================================================ -->
+    <!--
+    <div class="continent-form">
+      <input type="email" placeholder="your@email.com" class="continent-input">
+      <button class="continent-btn">Join the Cøntinent</button>
+    </div>
+    -->
+
+  </div>
+
+</section>
+
+  <!-- ============================================================
+       FOOTER
+  ============================================================ -->
+  <footer>
+    <div class="footer-top">
+
+      <!-- Band name / logo -->
+      <div class="footer-logo">ØCEANÍA</div>
+
+      <!-- Navigation column -->
+      <div class="footer-col">
+        <h4>Navigate</h4>
+        <a href="#single">New Single</a>
+        <a href="#music">Music</a>
+        <a href="#tour">Tour</a>
+        <!-- Link to the separate bio page -->
+        <a href="bio.html">Bio</a>
+        <a href="press.html">Press</a>
+      </div>
+
+      <!-- Social links column -->
+      <!-- Replace # with your actual social media profile URLs -->
+      <div class="footer-col">
+        <h4>Follow</h4>
+        <a href="https://www.instagram.com/oceania_banda/" target="_blank" rel="noopener">Instagram</a>
+        <a href="https://open.spotify.com/artist/15QX2MFDLf2Owsq7GIjmwU" target="_blank" rel="noopener">Spotify</a>
+        <a href="https://www.youtube.com/channel/UCTxrDLlP-fS4F4I4i0163rA" target="_blank" rel="noopener">YouTube</a>
+        <a href="https://www.tiktok.com/@oceania_music" target="_blank" rel="noopener">TikTok</a>
+      </div>
+
+      <!-- Contact column -->
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <!-- Replace with real email addresses -->
+        <a href="mailto:dahlia.ruizvera@gmail.com">Booking</a>
+      </div>
+
+    </div>
+
+    <!-- Bottom bar: copyright + tagline -->
+    <div class="footer-bottom">
+      <p class="footer-copy">© 2026 ØCEANÍA. All rights reserved.</p>
+      <p class="footer-copy">sounds from the in-between</p>
+    </div>
+
+  </footer>
+  <script src="script.js"></script>
+</body>
+</html>
+
+
+
+
+
+
+<!--FOR FUTURE IDEAS
+Background music that is alligned with the current single, but its lo fi version!
+The page moods changes with whatever single is displayed on the feartured section
+Preview for each song in the Singles' section
+
+
+-->

@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<!--
+  ============================================================
+  ØCEANÍA — Press Page
+  FILE: press.html
+  ============================================================
+
+  PAGE STRUCTURE:
+  1. <head>               → Meta, fonts, styles
+  2. <nav>                → Fixed navigation
+  3. .page-hero           → Title banner
+  4. #story-right-now     → The Story Right Now — current press narrative
+  5. #epk                 → One Sheet / EPK — key facts
+  6. #photos              → Press photos (downloadable)
+  7. #contact             → Contact form (Formspree)
+  8. <footer>             → Footer
+
+  LINKED FILES:
+  - styles.css  → shared design system
+  - script.js   → nav scroll + reveal animations
+
+  TO UPDATE:
+  - Replace YOUR_FORM_ID in the form action URL
+  - Replace placeholder press photos with real images
+  - Update streaming/social links throughout
+  - Update tech rider details when available
+  ============================================================
+-->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="ØCEANÍA — Press kit, photos, EPK, and contact for media and booking inquiries.">
+  <title>ØCEANÍA — Press & Media</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- ============================================================
+       NAVIGATION
+  ============================================================ -->
+  <nav class="nav" id="main-nav">
+    <a href="index.html" class="nav-logo">ØCEANÍA</a>
+    <ul class="nav-links">
+      <li><a href="index.html#single">Single</a></li>
+      <li><a href="index.html#music">Music</a></li>
+      <li><a href="index.html#tour">Tour</a></li>
+      <li><a href="bio.html">About</a></li>
+      <li><a href="press.html" class="nav-cta nav-active">Press</a></li>
+      <li><a href="contact.html" class="nav-cta">Contact</a></li>
+    </ul>
+  </nav>
+
+
+  <!-- ============================================================
+       PAGE HERO
+  ============================================================ -->
+  <header class="page-hero press-page-hero">
+    <div class="page-hero-inner">
+
+      <div class="breadcrumb">
+        <a href="index.html">Home</a>
+        <span class="breadcrumb-sep">/</span>
+        <span>Press & Media</span>
+      </div>
+
+      <h1 class="page-hero-title">Press &<br>Media</h1>
+
+      <p class="page-hero-sub">
+        Everything you need to cover ØCEANÍA —
+        the story, the photos, the facts, and the contact.
+      </p>
+
+    </div>
+  </header>
+
+
+  <!-- ============================================================
+       SECTION 1: THE STORY RIGHT NOW
+       ============================================================
+       This is the living press narrative. Update it every time
+       the band enters a new chapter.
+       Currently: Racconto era.
+  ============================================================ -->
+  <section class="bio-section" id="story-right-now">
+    <div class="two-col reveal">
+
+      <div class="col-label">
+        <p class="col-label-text">The Story Right Now</p>
+      </div>
+
+      <div class="bio-text">
+
+        <p>
+          <em>Racconto</em> is a remembrance. A question asked out loud:
+          who are we, where do we come from, and how do we keep going
+          when we feel lost?
+        </p>
+
+        <p>
+          Musically, it is an act of exploration. ØCEANÍA has never
+          been interested in staying inside one genre —
+          <strong>Racconto</strong> is proof of that. It moves through
+          textures and moods with intention, following the song wherever
+          it needs to go. The band is not afraid of their own identity.
+          They are curious about it.
+        </p>
+
+        <p>
+          Emotionally, the song is an invitation — to remember the
+          stories that made you, to ask for guidance from the people
+          you love, to let them into the room. On stage, this becomes
+          literal: guests, friends, family — members of the Cøntinent —
+          are invited to perform alongside them. The live show is where
+          ØCEANÍA is most itself.
+        </p>
+
+        <p>
+          A duo on paper. A band in every room they play.
+          Audiences consistently say it doesn't feel like two people —
+          it feels like a full band. Energetic, adrenalinic, alive.
+          A space to connect, to feel grateful, to belong to something
+          bigger than yourself.
+        </p>
+
+        <p>
+          <strong>Racconto</strong> is out now on all platforms.
+          A new single and debut album are in development —
+          a creative deep dive into everything Cris and Jadiel
+          are feeling right now. The next chapter is being written.
+        </p>
+
+        <!--
+          PRESS QUOTES — uncomment and fill in when you get them
+          <blockquote class="press-quote">
+            "Quote from a publication or journalist."
+            <cite>— Publication Name</cite>
+          </blockquote>
+        -->
+
+      </div>
+    </div>
+  </section>
+
+
+  
+
+
+  <!-- ============================================================
+       SECTION 3: PRESS PHOTOS
+       ============================================================
+       TO USE REAL PHOTOS:
+       Replace .press-photo-inner divs with:
+       <img src="images/press-1.jpg" alt="ØCEANÍA press photo"
+            style="width:100%;height:100%;object-fit:cover;">
+
+       Update href on the download links to point to actual files.
+  ============================================================ -->
+  <section class="bio-section" id="photos">
+    <div class="two-col reveal">
+
+      <div class="col-label">
+        <p class="col-label-text">Press Photos</p>
+      </div>
+
+      <div>
+        <p class="press-photos-intro">
+          Hi-res files available on request — contact press@oceania.com
+          or use the form below.
+        </p>
+
+        <div class="press-photos-grid">
+
+          <div class="press-photo">
+            <img src="images/Press/press-racconto-1.jpeg" alt="Oceania Press Photo 1">
+            <div class="press-photo-overlay">
+              <a href="images/Press/press-racconto-1.jpeg" class="photo-download-hint" download>Download ↓</a>
+            </div>
+          </div>
+
+          <div class="press-photo">
+            <img src="images/Press/press-racconto-2.jpeg" alt="Oceania Press Photo 2">
+            <div class="press-photo-overlay">
+              <a href="images/Press/press-racconto-2.jpeg" class="photo-download-hint" download>Download ↓</a>
+            </div>
+          </div>
+
+          <div class="press-photo">
+            <img src="images/Press/press-racconto-3.jpeg" alt="Oceania Press Photo 3">
+            <div class="press-photo-overlay">
+              <a href="images/Press/press-racconto-3.jpeg" class="photo-download-hint" download>Download ↓</a>
+            </div>
+          </div>
+
+          <div class="press-photo">
+            <img src="images/Press/press-racconto-4.jpeg" alt="Oceania Press Photo 4">
+            <div class="press-photo-overlay">
+              <a href="images/Press/press-racconto-4.jpeg" class="photo-download-hint" download>Download ↓</a>
+            </div>
+          </div>
+
+          <div class="press-photo">
+            <img src="images/Press/press-racconto-5.jpeg" alt="Oceania Press Photo 5">
+            <div class="press-photo-overlay">
+              <a href="images/Press/press-racconto-5.jpeg" class="photo-download-hint" download>Download ↓</a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+
+  <!-- ============================================================
+       SECTION 4: CONTACT CTA
+       Form lives on contact.html
+  ============================================================ -->
+  <section class="bio-section" id="contact">
+    <div class="two-col reveal">
+
+      <div class="col-label">
+        <p class="col-label-text">Contact</p>
+      </div>
+
+      <div>
+        <p class="contact-form-intro">
+          Booking, press, interviews, collabs —
+          we read everything.
+        </p>
+        <a href="contact.html" class="btn-outline">Get in touch →</a>
+      </div>
+
+    </div>
+  </section>
+
+
+
+ <!-- ============================================================
+       FOOTER
+  ============================================================ -->
+  <footer>
+    <div class="footer-top">
+
+      <!-- Band name / logo -->
+      <div class="footer-logo">ØCEANÍA</div>
+
+      <!-- Navigation column -->
+      <div class="footer-col">
+        <h4>Navigate</h4>
+        <a href="#single">New Single</a>
+        <a href="#music">Music</a>
+        <a href="#tour">Tour</a>
+        <!-- Link to the separate bio page -->
+        <a href="bio.html">Bio</a>
+        <a href="press.html">Press</a>
+      </div>
+
+      <!-- Social links column -->
+      <!-- Replace # with your actual social media profile URLs -->
+      <div class="footer-col">
+        <h4>Follow</h4>
+        <a href="https://www.instagram.com/oceania_banda/" target="_blank" rel="noopener">Instagram</a>
+        <a href="https://open.spotify.com/artist/15QX2MFDLf2Owsq7GIjmwU" target="_blank" rel="noopener">Spotify</a>
+        <a href="https://www.youtube.com/channel/UCTxrDLlP-fS4F4I4i0163rA" target="_blank" rel="noopener">YouTube</a>
+        <a href="https://www.tiktok.com/@oceania_music" target="_blank" rel="noopener">TikTok</a>
+      </div>
+
+      <!-- Contact column -->
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <!-- Replace with real email addresses -->
+        <a href="mailto:dahlia.ruizvera@gmail.com">Booking</a>
+      </div>
+
+    </div>
+
+    <!-- Bottom bar: copyright + tagline -->
+    <div class="footer-bottom">
+      <p class="footer-copy">© 2026 ØCEANÍA. All rights reserved.</p>
+      <p class="footer-copy">sounds from the in-between</p>
+    </div>
+
+  </footer>
+  <script src="script.js"></script>
+</body>
+</html>
+

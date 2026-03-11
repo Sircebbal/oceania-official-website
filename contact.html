@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<!--
+  ============================================================
+  ØCEANÍA — Contact Page
+  FILE: contact.html
+  ============================================================
+
+  PAGE STRUCTURE:
+  1. <head>       → Meta, fonts, styles
+  2. <nav>        → Fixed navigation
+  3. .page-hero   → Title banner
+  4. #contact     → Contact form (Formspree)
+  5. <footer>     → Footer
+
+  TO ACTIVATE:
+  - Replace YOUR_FORM_ID with your Formspree form ID
+    formspree.io → your form → Integration tab
+  ============================================================
+-->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="ØCEANÍA — Get in touch for booking, press, and general inquiries.">
+  <title>ØCEANÍA — Contact</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- ============================================================
+       NAVIGATION
+  ============================================================ -->
+  <nav class="nav" id="main-nav">
+    <a href="index.html" class="nav-logo">ØCEANÍA</a>
+    <ul class="nav-links">
+      <li><a href="index.html#single">Single</a></li>
+      <li><a href="index.html#music">Music</a></li>
+      <li><a href="index.html#tour">Tour</a></li>
+      <li><a href="bio.html">About</a></li>
+      <li><a href="press.html">Press</a></li>
+      <li><a href="contact.html" class="nav-cta nav-active">Contact</a></li>
+    </ul>
+  </nav>
+
+
+  <!-- ============================================================
+       PAGE HERO
+  ============================================================ -->
+  <header class="page-hero contact-page-hero">
+    <div class="page-hero-inner">
+
+      <div class="breadcrumb">
+        <a href="index.html">Home</a>
+        <span class="breadcrumb-sep">/</span>
+        <span>Contact</span>
+      </div>
+
+      <h1 class="page-hero-title">Get in<br>Touch</h1>
+
+      <p class="page-hero-sub">
+        Booking, press, collabs, or just want to say something —
+        we read everything.
+      </p>
+
+    </div>
+  </header>
+
+
+  <!-- ============================================================
+       CONTACT FORM
+  ============================================================ -->
+  <section class="bio-section" id="contact">
+    <div class="two-col reveal">
+
+      <div class="col-label">
+        <p class="col-label-text">Contact</p>
+      </div>
+
+      <div class="contact-form-wrap">
+
+        <p class="contact-form-intro">
+          Use the form below or find us on social media.
+          We'll get back to you as soon as we can.
+        </p>
+
+        <form
+          class="contact-form"
+          action="https://formspree.io/f/xeereyqk"
+          method="POST"
+        >
+
+          <div class="form-row">
+            <div class="form-field">
+              <label class="form-label" for="name">Name</label>
+              <input
+                class="form-input"
+                type="text"
+                id="name"
+                name="name"
+                placeholder="Your name"
+                required
+              >
+            </div>
+
+            <div class="form-field">
+              <label class="form-label" for="email">Email</label>
+              <input
+                class="form-input"
+                type="email"
+                id="email"
+                name="email"
+                placeholder="your@email.com"
+                required
+              >
+            </div>
+          </div>
+
+          <div class="form-field">
+            <label class="form-label" for="subject">Subject</label>
+            <select class="form-input form-select" id="subject" name="subject">
+              <option value="" disabled selected>What's this about?</option>
+              <option value="Booking">Booking</option>
+              <option value="Press & Media">Press & Media</option>
+              <option value="Interview">Interview</option>
+              <option value="Collaboration">Collaboration</option>
+              <option value="General">General</option>
+            </select>
+          </div>
+
+          <div class="form-field">
+            <label class="form-label" for="organisation">Publication / Organisation</label>
+            <input
+              class="form-input"
+              type="text"
+              id="organisation"
+              name="organisation"
+              placeholder="Optional"
+            >
+          </div>
+
+          <div class="form-field">
+            <label class="form-label" for="message">Message</label>
+            <textarea
+              class="form-input form-textarea"
+              id="message"
+              name="message"
+              placeholder="Tell us what's on your mind..."
+              required
+            ></textarea>
+          </div>
+
+          <button class="form-submit" type="submit">
+            Send Message →
+          </button>
+
+        </form>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       FOOTER
+  ============================================================ -->
+  <footer>
+    <div class="footer-top">
+
+      <!-- Band name / logo -->
+      <div class="footer-logo">ØCEANÍA</div>
+
+      <!-- Navigation column -->
+      <div class="footer-col">
+        <h4>Navigate</h4>
+        <a href="#single">New Single</a>
+        <a href="#music">Music</a>
+        <a href="#tour">Tour</a>
+        <!-- Link to the separate bio page -->
+        <a href="bio.html">Bio</a>
+        <a href="press.html">Press</a>
+      </div>
+
+      <!-- Social links column -->
+      <!-- Replace # with your actual social media profile URLs -->
+      <div class="footer-col">
+        <h4>Follow</h4>
+        <a href="https://www.instagram.com/oceania_banda/" target="_blank" rel="noopener">Instagram</a>
+        <a href="https://open.spotify.com/artist/15QX2MFDLf2Owsq7GIjmwU" target="_blank" rel="noopener">Spotify</a>
+        <a href="https://www.youtube.com/channel/UCTxrDLlP-fS4F4I4i0163rA" target="_blank" rel="noopener">YouTube</a>
+        <a href="https://www.tiktok.com/@oceania_music" target="_blank" rel="noopener">TikTok</a>
+      </div>
+
+      <!-- Contact column -->
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <!-- Replace with real email addresses -->
+        <a href="mailto:dahlia.ruizvera@gmail.com">Booking</a>
+      </div>
+
+    </div>
+
+    <!-- Bottom bar: copyright + tagline -->
+    <div class="footer-bottom">
+      <p class="footer-copy">© 2026 ØCEANÍA. All rights reserved.</p>
+      <p class="footer-copy">sounds from the in-between</p>
+    </div>
+
+  </footer>
+  <script src="script.js"></script>
+</body>
+</html>
+
