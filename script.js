@@ -85,26 +85,21 @@ const revealElements = document.querySelectorAll('.reveal, .reveal-children, .re
     // syncing with the browser's render cycle.
     // ============================================================
 
-    const heroContent = document.querySelector('.hero-content');
-    const heroBg = document.querySelector('.hero-bg');
+ const heroContent = document.querySelector('.hero-content');
+const heroBg = document.querySelector('.hero-bg');
 
-    window.addEventListener('scroll', function() {
-      const scrolled = window.scrollY;
+if (heroContent && heroBg) {
+  window.addEventListener('scroll', function() {
+    const scrolled = window.scrollY;
 
-      // Only run while hero is visible (first 100vh)
-      if (scrolled < window.innerHeight) {
-        // Move content up at 30% of scroll speed
-        heroContent.style.transform = `translateY(${scrolled * 0.3}px)`;
-
-        // Fade out hero content as user scrolls
-        // 1 - (scrolled / 400) goes from 1 to 0 over first 400px of scroll
-        const opacity = Math.max(0, 1 - scrolled / 400);
-        heroContent.style.opacity = opacity;
-
-        // Move background slightly for depth (slower = deeper layer feel)
-        heroBg.style.transform = `translateY(${scrolled * 0.15}px)`;
-      }
-    });
+    if (scrolled < window.innerHeight) {
+      heroContent.style.transform = `translateY(${scrolled * 0.3}px)`;
+      const opacity = Math.max(0, 1 - scrolled / 400);
+      heroContent.style.opacity = opacity;
+      heroBg.style.transform = `translateY(${scrolled * 0.15}px)`;
+    }
+  });
+}
 
 
 
