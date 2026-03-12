@@ -1155,46 +1155,132 @@ footer {
    — All breakpoint overrides in one place for easy maintenance.
 ============================================================ */
 @media (max-width: 900px) {
+
+  /* --- NAV --- */
   .nav,
   .nav.nav-scrolled { padding: 20px 24px; }
-
   /* Nav links hidden on mobile — TODO: add hamburger menu */
   .nav-links { display: none; }
 
-  .featured-single-inner {
-    grid-template-columns: 1fr;
-    gap: 40px;
-  }
-
+  /* --- INDEX PAGE SECTIONS --- */
   .hero-content { padding: 0 24px 80px; }
 
-  .singles-section,
-  .tour-section,
-  .featured-single,
-  .band-intro-section,
-  .continent-section { padding: 80px 24px; }
+  .featured-single { padding: 80px 24px; }
+  .featured-single-inner { grid-template-columns: 1fr; gap: 40px; }
 
+  .band-intro-section { padding: 80px 24px; }
+  .band-intro-body { font-size: 22px; }
+
+  .singles-section { padding: 80px 24px; }
+  .singles-grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); }
+
+  .tour-section { padding: 80px 24px; }
   .tour-row { grid-template-columns: 100px 1fr; }
   .tour-ticket { display: none; }
 
-  .footer-top { flex-direction: column; gap: 32px; }
+  .continent-section { padding: 80px 24px; }
+
+  /* --- FOOTER --- */
   footer { padding: 48px 24px 32px; }
+  .footer-top { flex-direction: column; gap: 32px; }
   .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
 
-  /* Bio / press / contact pages */
+  /* --- PAGE HERO (bio, press, contact) --- */
   .page-hero { padding: 120px 24px 60px; }
+  /* Hide the giant decorative BIO/HI background text on mobile */
   .page-hero::before { display: none; }
-  .bio-section { padding: 80px 24px; }
-  .two-col { grid-template-columns: 1fr; gap: 32px; }
+  .page-hero-title { font-size: clamp(44px, 12vw, 80px); }
+
+  /* --- BIO / PRESS / CONTACT SECTIONS --- */
+  .bio-section { padding: 60px 24px; }
+
+  /* Stack the two-column label+content layout to single column */
+  .two-col {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  /* Label no longer needs to be sticky when stacked */
   .col-label { position: static; }
-  .members-grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); }
-  .photos-grid { grid-template-columns: 1fr 1fr; }
-  .press-photo:first-child { grid-row: span 1; }
+
+  /* Bio text slightly smaller on mobile */
+  .bio-text p { font-size: 15px; }
+  .bio-text p:first-child { font-size: 17px; }
+
+  /* Members grid — 2 cards side by side on tablet, 1 col on phone */
+  .members-grid { grid-template-columns: 1fr 1fr; gap: 20px; }
+
+  /* Live photos — 2 columns on mobile */
+  .photos-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 4px;
+  }
+  .photos-grid .press-photo { aspect-ratio: 2/3; }
+
+  /* Press photos — stack to single column on mobile */
+  .press-photos-grid {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto;
+  }
+  /* Remove the spanning first photo — all equal on mobile */
+  .press-photos-grid .press-photo:first-child {
+    grid-row: span 1;
+    aspect-ratio: 4/3;
+  }
+  .press-photos-grid .press-photo:not(:first-child) {
+    aspect-ratio: 4/3;
+  }
 }
 
 @media (max-width: 600px) {
+  /* Members go single column on small phones */
+  .members-grid { grid-template-columns: 1fr; max-width: 280px; }
+
+  /* Live photos — single column on very small phones */
+  .photos-grid { grid-template-columns: 1fr; }
+  .photos-grid .press-photo { aspect-ratio: 3/2; }
+
+  /* Press photos — single column on small phones */
+  .press-photos-grid { grid-template-columns: 1fr; }
+  .press-photos-grid .press-photo,
+  .press-photos-grid .press-photo:first-child { aspect-ratio: 3/2; }
+
+  /* Contact form — stack name/email fields */
   .form-row { grid-template-columns: 1fr; }
   .form-submit { align-self: stretch; text-align: center; }
+
+  /* EPK table — stack key/value on small screens */
+  .epk-key { display: block; padding-bottom: 4px; }
+  .epk-table tr { display: flex; flex-direction: column; padding: 16px 0; }
+}
+
+@media (max-width: 900px) {
+  /* Already revealed — skip animation on mobile to avoid content disappearing */
+  .reveal,
+  .reveal-left,
+  .reveal-right,
+  .reveal-children {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+@media (max-width: 900px) {
+  .reveal,
+  .reveal.revealed,
+  .reveal-left,
+  .reveal-left.revealed,
+  .reveal-right,
+  .reveal-right.revealed,
+  .reveal-children,
+  .reveal-children.revealed,
+  .reveal-children > * {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
 }
 
 

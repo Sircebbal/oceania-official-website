@@ -1,113 +1,112 @@
-//    ============================================================
-//        JAVASCRIPT
-//        ============================================================
-//        All scripts go at the bottom of <body> — this ensures the
-//        HTML is parsed before JS tries to manipulate it.
-//        No external libraries needed — pure vanilla JS.
-//   ============================================================ -->
-//   <script>
-//     // ============================================================
-//     // 1. NAV SCROLL BEHAVIOR
-//     // ============================================================
-//     // We listen for the window "scroll" event.
-//     // When the user scrolls past 60px, we add the "nav-scrolled"
-//     // class to the nav element, which triggers the CSS transition
-//     // to add a backdrop-blur background.
-//     // ============================================================
-
-    const nav = document.getElementById('main-nav');
-
-    window.addEventListener('scroll', function() {
-      // window.scrollY = how many pixels the page has scrolled vertically
-      if (window.scrollY > 60) {
-        nav.classList.add('nav-scrolled');
-      } else {
-        nav.classList.remove('nav-scrolled');
-      }
-    });
+// ============================================================
+//  ØCEANÍA — Main JavaScript
+//  FILE: script.js
+//  Shared across: index.html, bio.html, press.html, contact.html
+//
+//  STRUCTURE:
+//  1. Nav Scroll Behavior
+//  2. Scroll Reveal — Intersection Observer
+//  3. Hero Parallax Effect (index.html only)
+//  4. Contact Form — Async Submit (contact.html only)
+// ============================================================
 
 
-    // ============================================================
-    // 2. SCROLL REVEAL — INTERSECTION OBSERVER
-    // ============================================================
-    // IntersectionObserver watches elements and fires a callback
-    // when they enter or leave the viewport.
-    //
-    // This is more performant than listening to the scroll event
-    // for every element — the browser handles it natively.
-    //
-    // How it works:
-    // - We grab all elements with class "reveal" or "reveal-children"
-    // - When one enters the viewport (threshold: 0.15 = 15% visible),
-    //   we add the "revealed" class
-    // - The CSS transition on .reveal / .reveal-children handles
-    //   the actual animation
-    // ============================================================
+// ============================================================
+//  1. NAV SCROLL BEHAVIOR
+//  — Adds .nav-scrolled to the nav after 60px of scroll.
+//  — CSS handles the frosted glass transition.
+// ============================================================
+const nav = document.getElementById('main-nav');
 
-    // Configuration for the observer
-    const observerOptions = {
-      root: null,           // null = use the browser viewport as root
-      rootMargin: '0px',    // no extra margin around viewport
-      threshold: 0.15       // trigger when 15% of element is visible
-    };
-
-    // Callback fires whenever an observed element's visibility changes
-    const revealCallback = function(entries, observer) {
-      entries.forEach(function(entry) {
-        // entry.isIntersecting = true when element is in viewport
-        if (entry.isIntersecting) {
-          entry.target.classList.add('revealed');
-
-          // Once revealed, stop observing — no need to re-animate
-          observer.unobserve(entry.target);
-        }
-      });
-    };
-
-    // Create the observer with our config and callback
-    const revealObserver = new IntersectionObserver(revealCallback, observerOptions);
-
-    // Find all elements to observe and start watching them
-const revealElements = document.querySelectorAll('.reveal, .reveal-children, .reveal-left, .reveal-right');
-    // querySelectorAll returns a NodeList — we convert to array with spread
-    [...revealElements].forEach(function(el) {
-      revealObserver.observe(el);
-    });
+if (nav) {
+  window.addEventListener('scroll', function () {
+    if (window.scrollY > 60) {
+      nav.classList.add('nav-scrolled');
+    } else {
+      nav.classList.remove('nav-scrolled');
+    }
+  });
+}
 
 
-    // ============================================================
-    // 3. HERO PARALLAX EFFECT
-    // ============================================================
-    // As the user scrolls down, we shift the hero content upward
-    // at half the scroll speed — this creates depth/parallax.
-    //
-    // requestAnimationFrame ensures smooth 60fps animation by
-    // syncing with the browser's render cycle.
-    // ============================================================
+// ============================================================
+//  2. SCROLL REVEAL — INTERSECTION OBSERVER
+//  — Watches all .reveal, .reveal-left, .reveal-right,
+//    and .reveal-children elements.
+//  — Adds .revealed when 15% of the element enters the viewport.
+//  — Stops watching after reveal (no re-animation on scroll back).
+// ============================================================
+const observerOptions = {
+  root: null,
+  rootMargin: '0px',
+  threshold: 0
+};
 
- const heroContent = document.querySelector('.hero-content');
+const revealCallback = function (entries, observer) {
+  entries.forEach(function (entry) {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('revealed');
+      observer.unobserve(entry.target);
+    }
+  });
+};
+
+const revealObserver = new IntersectionObserver(revealCallback, observerOptions);
+
+const revealElements = document.querySelectorAll(
+  '.reveal, .reveal-children, .reveal-left, .reveal-right'
+);
+
+// On mobile, skip the observer and reveal everything immediately
+if (window.innerWidth < 900) {
+  revealElements.forEach(function (el) {
+    el.classList.add('revealed');
+  });
+} else {
+  revealElements.forEach(function (el) {
+    revealObserver.observe(el);
+  });
+}
+
+
+// ============================================================
+//  3. HERO PARALLAX EFFECT
+//  — index.html only — guarded by null check.
+//  — Shifts hero content up at 30% scroll speed.
+//  — Fades hero content out over the first 400px of scroll.
+//  — Shifts background at 15% for depth.
+//  — Disabled on mobile (under 768px) for performance.
+// ============================================================
+const heroContent = document.querySelector('.hero-content');
 const heroBg = document.querySelector('.hero-bg');
 
 if (heroContent && heroBg) {
-  window.addEventListener('scroll', function() {
+  window.addEventListener('scroll', function () {
+    // Skip parallax on mobile — not needed and can cause jank
+    if (window.innerWidth < 768) return;
+
     const scrolled = window.scrollY;
 
     if (scrolled < window.innerHeight) {
       heroContent.style.transform = `translateY(${scrolled * 0.3}px)`;
-      const opacity = Math.max(0, 1 - scrolled / 400);
-      heroContent.style.opacity = opacity;
+      heroContent.style.opacity = Math.max(0, 1 - scrolled / 400);
       heroBg.style.transform = `translateY(${scrolled * 0.15}px)`;
     }
   });
 }
 
 
-
-
-    const form = document.querySelector('.contact-form');
+// ============================================================
+//  4. CONTACT FORM — ASYNC SUBMIT
+//  — contact.html only — guarded by null check.
+//  — Submits to Formspree without reloading the page.
+//  — Success: replaces form with a confirmation message.
+//  — Error: appends an error message below the submit button.
+// ============================================================
+const form = document.querySelector('.contact-form');
 
 if (form) {
-  form.addEventListener('submit', async (e) => {
+  form.addEventListener('submit', async function (e) {
     e.preventDefault();
 
     const data = new FormData(form);
@@ -123,8 +122,8 @@ if (form) {
           Message received. We'll be in touch soon.
         </p>`;
     } else {
-      const el = document.querySelector('.form-feedback--error');
-      if (!el) {
+      const existing = document.querySelector('.form-feedback--error');
+      if (!existing) {
         form.insertAdjacentHTML('beforeend', `
           <p class="form-feedback form-feedback--error">
             Something went wrong. Try again or email us directly.

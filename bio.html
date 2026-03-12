@@ -1,24 +1,8 @@
 <!DOCTYPE html>
 <!--
   ============================================================
-  ØCEANÍA — Bio / Press Page
+  ØCEANÍA — Bio Page
   FILE: bio.html
-  ============================================================
-
-  PAGE STRUCTURE:
-  1. <head>             → Meta tags, fonts, linked stylesheet
-  2. <nav>              → Fixed navigation bar
-  3. .page-hero         → Title banner
-  4. #story-so-far      → The Story So Far — band history
-  5. #story-right-now   → The Story Right Now — current chapter / press
-  6. #members           → Cris & Jadiel + the extended family
-  7. #photos            → Press photo gallery
-  8. #contact           → Booking and press contacts
-  9. <footer>           → Footer
-
-  LINKED FILES:
-  - styles.css  → all visual styles
-  - script.js   → nav scroll + reveal animations
   ============================================================
 -->
 <html lang="en">
@@ -27,17 +11,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="ØCEANÍA — The story of Cris Labbé and Jadiel Lutto. Bio, press, and contact.">
   <title>ØCEANÍA — About</title>
-
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-  <!-- ============================================================
-       NAVIGATION
-       Same structure as index.html.
-       "nav-active" highlights the current page.
-  ============================================================ -->
   <nav class="nav" id="main-nav">
     <a href="index.html" class="nav-logo">ØCEANÍA</a>
     <ul class="nav-links">
@@ -51,36 +29,23 @@
   </nav>
 
 
-  <!-- ============================================================
-       PAGE HERO / TITLE BANNER
-  ============================================================ -->
   <header class="page-hero bio-page-hero">
     <div class="page-hero-inner">
-
       <div class="breadcrumb">
         <a href="index.html">Home</a>
         <span class="breadcrumb-sep">/</span>
         <span>About</span>
       </div>
-
       <h1 class="page-hero-title">About <br> ØCEANÍA</h1>
-
       <p class="page-hero-sub">
-        The story of ØCEANÍA — where they come from,
-        where they are, and where they're going.
-      </p>
-
+      
     </div>
   </header>
 
-<!-- ============================================================
-       SECTION 3: THE MEMBERS
-       ============================================================
-       TO ADD PHOTOS — replace .member-photo-placeholder with:
-       <img src="images/cris.jpg" alt="Cris Labbé">
-  ============================================================ -->
+
+  <!-- MEMBERS -->
   <section class="bio-section" id="members">
-    <div class="two-col reveal">
+    <div class="two-col">
 
       <div class="col-label">
         <p class="col-label-text">Members</p>
@@ -89,12 +54,9 @@
       <div>
         <div class="members-grid">
 
-          <!-- CRIS LABBÉ -->
           <div class="member-card">
             <div class="member-photo">
               <img src="images/Members/member-cris-racconto.jpg" alt="Cris Labbé">
-              <div class="member-photo-placeholder">
-              </div>
             </div>
             <p class="member-name">Cris Labbé</p>
             <p class="member-role">Vocals / Guitar</p>
@@ -105,36 +67,28 @@
             </p>
           </div>
 
-          <!-- JADIEL LUTTO -->
           <div class="member-card">
             <div class="member-photo">
-                <img src="images/Members/member-jadiel-racconto.jpg" alt="Jadiel Lutto">
-              <div class="member-photo-placeholder">
-                <p class="photo-hint"></p>
-              </div>
+              <img src="images/Members/member-jadiel-racconto.jpg" alt="Jadiel Lutto">
             </div>
             <p class="member-name">Jadiel Lutto</p>
             <p class="member-role">Drums</p>
             <p class="member-bio">
-              Friends with Cris since 2014. Stepped away,
-              came back, and completed the seal. The heartbeat
-              of the live show.
+             Drummer, engineer, and visual aesthetic director. 
+             The heartbeat of the live show.
             </p>
           </div>
 
         </div>
-      </section>
-  
+      </div>
 
-  <!-- ============================================================
-       SECTION 1: THE STORY SO FAR
-       ============================================================
-       The full band history.
-       Named as a nod to The Story So Far — intentional reference.
-       Update this as the band's history grows.
-  ============================================================ -->
+    </div>
+  </section>
+
+
+  <!-- THE STORY SO FAR -->
   <section class="bio-section" id="story-so-far">
-    <div class="two-col reveal">
+    <div class="two-col">
 
       <div class="col-label">
         <p class="col-label-text">The Story So Far</p>
@@ -142,7 +96,6 @@
 
       <div class="bio-text">
 
-        <!-- Opening pull quote — the emotional core -->
         <p>
           ØCEANÍA was never just a band. It was always a circle
           of friends finding their way back to each other.
@@ -206,23 +159,14 @@
         </p>
 
       </div>
+
     </div>
   </section>
 
 
-  
-
-  
-
-
-  <!-- ============================================================
-       SECTION 4: PRESS PHOTOS
-       ============================================================
-       TO USE REAL PHOTOS — replace .press-photo-inner with:
-       <img src="images/press-1.jpg" alt="ØCEANÍA" style="width:100%;height:100%;object-fit:cover;">
-  ============================================================ -->
+  <!-- PRESS PHOTOS -->
   <section class="bio-section" id="photos">
-    <div class="two-col reveal">
+    <div class="two-col">
 
       <div class="col-label">
         <p class="col-label-text">Press Photos</p>
@@ -266,7 +210,7 @@
             </div>
           </div>
 
-             <div class="press-photo">
+          <div class="press-photo">
             <img src="images/Live/live-oceania-6.jpeg" alt="ØCEANÍA" style="width:100%;height:100%;object-fit:cover;">
             <div class="press-photo-overlay">
               <a href="images/Live/live-oceania-6.jpeg" class="photo-download-hint" download>Download ↓</a>
@@ -284,13 +228,9 @@
   </section>
 
 
-
-  <!-- ============================================================
-       SECTION 5: CONTACT CTA
-       Form lives on contact.html
-  ============================================================ -->
+  <!-- CONTACT CTA -->
   <section class="bio-section" id="contact">
-    <div class="two-col reveal">
+    <div class="two-col">
 
       <div class="col-label">
         <p class="col-label-text">Contact</p>
@@ -308,29 +248,17 @@
   </section>
 
 
-
-   <!-- ============================================================
-       FOOTER
-  ============================================================ -->
   <footer>
     <div class="footer-top">
-
-      <!-- Band name / logo -->
       <div class="footer-logo">ØCEANÍA</div>
-
-      <!-- Navigation column -->
       <div class="footer-col">
         <h4>Navigate</h4>
-        <a href="#single">New Single</a>
-        <a href="#music">Music</a>
-        <a href="#tour">Tour</a>
-        <!-- Link to the separate bio page -->
+        <a href="index.html#single">New Single</a>
+        <a href="index.html#music">Music</a>
+        <a href="index.html#tour">Tour</a>
         <a href="bio.html">Bio</a>
         <a href="press.html">Press</a>
       </div>
-
-      <!-- Social links column -->
-      <!-- Replace # with your actual social media profile URLs -->
       <div class="footer-col">
         <h4>Follow</h4>
         <a href="https://www.instagram.com/oceania_banda/" target="_blank" rel="noopener">Instagram</a>
@@ -338,23 +266,17 @@
         <a href="https://www.youtube.com/channel/UCTxrDLlP-fS4F4I4i0163rA" target="_blank" rel="noopener">YouTube</a>
         <a href="https://www.tiktok.com/@oceania_music" target="_blank" rel="noopener">TikTok</a>
       </div>
-
-      <!-- Contact column -->
       <div class="footer-col">
         <h4>Contact</h4>
-        <!-- Replace with real email addresses -->
         <a href="mailto:dahlia.ruizvera@gmail.com">Booking</a>
       </div>
-
     </div>
-
-    <!-- Bottom bar: copyright + tagline -->
     <div class="footer-bottom">
       <p class="footer-copy">© 2026 ØCEANÍA. All rights reserved.</p>
       <p class="footer-copy">sounds from the in-between</p>
     </div>
-
   </footer>
+
   <script src="script.js"></script>
 </body>
 </html>
