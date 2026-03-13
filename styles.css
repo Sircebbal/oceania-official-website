@@ -1195,11 +1195,13 @@ footer {
   .bio-section { padding: 60px 24px; }
 
   /* Stack the two-column label+content layout to single column */
-  .two-col {
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
-  }
+.two-col {
+  display: block;
+}
+
+.col-label {
+  display: none;
+}
 
   /* Label no longer needs to be sticky when stacked */
   .col-label { position: static; }
