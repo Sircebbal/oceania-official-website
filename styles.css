@@ -131,13 +131,13 @@ body::before {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: linear-gradient(to bottom, rgba(8, 10, 15, 0.9) 0%, transparent 100%);
+  background: linear-gradient(to bottom, rgba(10, 7, 3, 0.9) 0%, transparent 100%);
   transition: padding var(--transition-fast), background var(--transition-fast);
 }
 
 .nav.nav-scrolled {
   padding: 18px 48px;
-  background: rgba(8, 10, 15, 0.92);
+  background: rgba(10, 7, 3, 0.92);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--color-border);
@@ -1809,6 +1809,7 @@ footer {
   color: #c0604a;
   border-color: #c0604a;
 }
+
 /* ============================================================
    MOBILE PHOTO GALLERIES — swipeable horizontal scroll
 ============================================================ */
@@ -1843,5 +1844,23 @@ footer {
     height: 100% !important;
     object-fit: cover !important;
     display: block !important;
+  }
+}
+
+/* Press photos section — remove side padding so grid goes edge to edge on mobile */
+@media (max-width: 900px) {
+  .press-photos-section {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+}
+
+
+@media (max-width: 900px) {
+  .two-col {
+    display: block !important;
+  }
+  .col-label {
+    display: none !important;
   }
 }
