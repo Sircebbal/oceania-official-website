@@ -1197,64 +1197,57 @@ footer {
 
   /* --- BIO / PRESS / CONTACT --- */
   .bio-section { padding: 60px 24px; }
-
-  /* Collapse two-col: hide label, content goes full width */
   .two-col { display: block; width: 100%; }
   .col-label { display: none; }
-
-  /* Bio text */
   .bio-text p { font-size: 15px; }
   .bio-text p:first-child { font-size: 17px; }
+  .members-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; width: 100%; }
 
-  /* Members — 2 columns, full width */
-  .members-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
-    width: 100%;
-  }
-
-  /* Live photos — 3 columns, full width */
-  .photos-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 4px;
-    width: 100%;
-  }
-  .photos-grid .press-photo { aspect-ratio: 2/3; }
-
-  /* Press photos — 2 columns, full width */
+  /* --- PHOTO GALLERIES — horizontal swipe --- */
+  .photos-grid,
   .press-photos-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: auto;
-    gap: 4px;
-    width: 100%;
+    display: flex !important;
+    flex-direction: row !important;
+    overflow-x: auto !important;
+    scroll-snap-type: x mandatory !important;
+    -webkit-overflow-scrolling: touch !important;
+    gap: 8px !important;
+    width: 100% !important;
+    padding-bottom: 12px !important;
+    box-sizing: border-box !important;
   }
-  .press-photos-grid .press-photo:first-child { grid-row: span 1; aspect-ratio: 4/3; }
-  .press-photos-grid .press-photo:not(:first-child) { aspect-ratio: 4/3; }
-  .press-photos-grid .press-photo img,
-  .photos-grid .press-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+  /* Bio page — portrait photos */
+  .photos-grid .press-photo {
+    flex: 0 0 78vw !important;
+    width: 78vw !important;
+    aspect-ratio: 3/4 !important;
+    scroll-snap-align: center !important;
+  }
+
+  /* Press page — landscape photos */
+  .press-photos-grid .press-photo,
+  .press-photos-grid .press-photo:first-child {
+    flex: 0 0 85vw !important;
+    width: 85vw !important;
+    aspect-ratio: 4/3 !important;
+    scroll-snap-align: center !important;
+    grid-row: span 1 !important;
+  }
+
+  .photos-grid .press-photo img,
+  .press-photos-grid .press-photo img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    display: block !important;
+  }
 }
 
 @media (max-width: 600px) {
-  /* Members — single column */
   .members-grid { grid-template-columns: 1fr; max-width: 320px; }
-
-  /* Live photos — 2 columns */
-  .photos-grid { grid-template-columns: 1fr 1fr; }
-  .photos-grid .press-photo { aspect-ratio: 1/1; }
-
-  /* Press photos — single column */
-  .press-photos-grid { grid-template-columns: 1fr; }
-  .press-photos-grid .press-photo,
-  .press-photos-grid .press-photo:first-child { aspect-ratio: 4/3; }
-
-  /* Contact form */
   .form-row { grid-template-columns: 1fr; }
   .form-submit { align-self: stretch; text-align: center; }
-
-  /* EPK table */
   .epk-key { display: block; padding-bottom: 4px; }
   .epk-table tr { display: flex; flex-direction: column; padding: 16px 0; }
 }
@@ -1870,64 +1863,4 @@ footer {
 .form-feedback--error {
   color: #c0604a;
   border-color: #c0604a;
-}
-
-@media (max-width: 900px) {
-  .bio-section {
-    padding: 60px 16px;
-  }
-  
-  .bio-section .two-col {
-    display: block !important;
-    width: 100% !important;
-  }
-
-  .bio-section .two-col > div {
-    width: 100% !important;
-    min-width: 0 !important;
-  }
-
-  .photos-grid,
-  .press-photos-grid {
-    width: 100% !important;
-    box-sizing: border-box !important;
-  }
-}
-
-@media (max-width: 900px) {
-  .photos-grid,
-  .press-photos-grid {
-    display: flex !important;
-    flex-direction: row !important;
-    overflow-x: auto !important;
-    scroll-snap-type: x mandatory !important;
-    gap: 8px !important;
-    width: 100% !important;
-    padding-bottom: 12px !important;
-  }
-
-  .photos-grid .press-photo,
-  .press-photos-grid .press-photo,
-  .press-photos-grid .press-photo:first-child {
-    flex: 0 0 85vw !important;
-    width: 85vw !important;
-    aspect-ratio: 4/3 !important;
-    scroll-snap-align: center !important;
-    grid-row: span 1 !important;
-  }
-
-  .photos-grid .press-photo img,
-  .press-photos-grid .press-photo img {
-    width: 100% !important;
-    height: 100% !important;
-    object-fit: cover !important;
-  }
-}
-
-@media (max-width: 900px) {
-  .photos-grid .press-photo {
-    aspect-ratio: 3/4 !important;
-    flex: 0 0 75vw !important;
-    width: 75vw !important;
-  }
 }
