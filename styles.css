@@ -1926,6 +1926,8 @@ footer {
 
 @media (max-width: 900px) {
   .photos-grid .press-photo {
-    aspect-ratio: 2/3 !important;
+    aspect-ratio: 3/4 !important;
+    flex: 0 0 75vw !important;
+    width: 75vw !important;
   }
 }
