@@ -1873,8 +1873,23 @@ footer {
 }
 
 @media (max-width: 900px) {
-  .bio-section .two-col > div:last-child {
-    width: 100%;
-    min-width: 0;
+  .bio-section {
+    padding: 60px 16px;
+  }
+  
+  .bio-section .two-col {
+    display: block !important;
+    width: 100% !important;
+  }
+
+  .bio-section .two-col > div {
+    width: 100% !important;
+    min-width: 0 !important;
+  }
+
+  .photos-grid,
+  .press-photos-grid {
+    width: 100% !important;
+    box-sizing: border-box !important;
   }
 }
