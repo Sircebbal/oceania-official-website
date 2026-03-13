@@ -1235,13 +1235,7 @@ footer {
     grid-row: span 1 !important;
   }
 
-  .photos-grid .press-photo {
-    flex: 0 0 78vw !important;
-    width: 78vw !important;
-    aspect-ratio: 3/4 !important;
-    scroll-snap-align: center !important;
-  }
-}
+ 
 
 @media (max-width: 600px) {
   .members-grid { grid-template-columns: 1fr; max-width: 320px; }
