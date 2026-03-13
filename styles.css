@@ -1923,3 +1923,9 @@ footer {
     object-fit: cover !important;
   }
 }
+
+@media (max-width: 900px) {
+  .photos-grid .press-photo {
+    aspect-ratio: 2/3 !important;
+  }
+}
