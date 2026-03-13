@@ -1871,3 +1871,10 @@ footer {
   color: #c0604a;
   border-color: #c0604a;
 }
+
+@media (max-width: 900px) {
+  .bio-section .two-col > div:last-child {
+    width: 100%;
+    min-width: 0;
+  }
+}
