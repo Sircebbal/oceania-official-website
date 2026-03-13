@@ -1156,28 +1156,33 @@ footer {
 ============================================================ */
 @media (max-width: 900px) {
 
+  /* --- DISABLE SCROLL REVEAL ON MOBILE --- */
+  .reveal, .reveal.revealed,
+  .reveal-left, .reveal-left.revealed,
+  .reveal-right, .reveal-right.revealed,
+  .reveal-children, .reveal-children.revealed,
+  .reveal-children > * {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+
   /* --- NAV --- */
   .nav,
   .nav.nav-scrolled { padding: 20px 24px; }
-  /* Nav links hidden on mobile — TODO: add hamburger menu */
   .nav-links { display: none; }
 
-  /* --- INDEX PAGE SECTIONS --- */
+  /* --- INDEX PAGE --- */
   .hero-content { padding: 0 24px 80px; }
-
   .featured-single { padding: 80px 24px; }
   .featured-single-inner { grid-template-columns: 1fr; gap: 40px; }
-
   .band-intro-section { padding: 80px 24px; }
   .band-intro-body { font-size: 22px; }
-
   .singles-section { padding: 80px 24px; }
   .singles-grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); }
-
   .tour-section { padding: 80px 24px; }
   .tour-row { grid-template-columns: 100px 1fr; }
   .tour-ticket { display: none; }
-
   .continent-section { padding: 80px 24px; }
 
   /* --- FOOTER --- */
@@ -1185,104 +1190,73 @@ footer {
   .footer-top { flex-direction: column; gap: 32px; }
   .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
 
-  /* --- PAGE HERO (bio, press, contact) --- */
+  /* --- PAGE HERO --- */
   .page-hero { padding: 120px 24px 60px; }
-  /* Hide the giant decorative BIO/HI background text on mobile */
   .page-hero::before { display: none; }
   .page-hero-title { font-size: clamp(44px, 12vw, 80px); }
 
-  /* --- BIO / PRESS / CONTACT SECTIONS --- */
+  /* --- BIO / PRESS / CONTACT --- */
   .bio-section { padding: 60px 24px; }
 
-  /* Stack the two-column label+content layout to single column */
-.two-col {
-  display: block;
-}
+  /* Collapse two-col: hide label, content goes full width */
+  .two-col { display: block; width: 100%; }
+  .col-label { display: none; }
 
-.col-label {
-  display: none;
-}
-
-  /* Label no longer needs to be sticky when stacked */
-  .col-label { position: static; }
-
-  /* Bio text slightly smaller on mobile */
+  /* Bio text */
   .bio-text p { font-size: 15px; }
   .bio-text p:first-child { font-size: 17px; }
 
-  /* Members grid — 2 cards side by side on tablet, 1 col on phone */
-  .members-grid { grid-template-columns: 1fr 1fr; gap: 20px; }
-
-  /* Live photos — 2 columns on mobile */
-  .photos-grid {
+  /* Members — 2 columns, full width */
+  .members-grid {
+    display: grid;
     grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    width: 100%;
+  }
+
+  /* Live photos — 3 columns, full width */
+  .photos-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
     gap: 4px;
+    width: 100%;
   }
   .photos-grid .press-photo { aspect-ratio: 2/3; }
 
-  /* Press photos — stack to single column on mobile */
+  /* Press photos — 2 columns, full width */
   .press-photos-grid {
+    display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: auto;
+    gap: 4px;
+    width: 100%;
   }
-  /* Remove the spanning first photo — all equal on mobile */
-  .press-photos-grid .press-photo:first-child {
-    grid-row: span 1;
-    aspect-ratio: 4/3;
-  }
-  .press-photos-grid .press-photo:not(:first-child) {
-    aspect-ratio: 4/3;
-  }
+  .press-photos-grid .press-photo:first-child { grid-row: span 1; aspect-ratio: 4/3; }
+  .press-photos-grid .press-photo:not(:first-child) { aspect-ratio: 4/3; }
+  .press-photos-grid .press-photo img,
+  .photos-grid .press-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
 }
 
 @media (max-width: 600px) {
-  /* Members go single column on small phones */
-  .members-grid { grid-template-columns: 1fr; max-width: 280px; }
+  /* Members — single column */
+  .members-grid { grid-template-columns: 1fr; max-width: 320px; }
 
-  /* Live photos — single column on very small phones */
-  .photos-grid { grid-template-columns: 1fr; }
-  .photos-grid .press-photo { aspect-ratio: 3/2; }
+  /* Live photos — 2 columns */
+  .photos-grid { grid-template-columns: 1fr 1fr; }
+  .photos-grid .press-photo { aspect-ratio: 1/1; }
 
-  /* Press photos — single column on small phones */
+  /* Press photos — single column */
   .press-photos-grid { grid-template-columns: 1fr; }
   .press-photos-grid .press-photo,
-  .press-photos-grid .press-photo:first-child { aspect-ratio: 3/2; }
+  .press-photos-grid .press-photo:first-child { aspect-ratio: 4/3; }
 
-  /* Contact form — stack name/email fields */
+  /* Contact form */
   .form-row { grid-template-columns: 1fr; }
   .form-submit { align-self: stretch; text-align: center; }
 
-  /* EPK table — stack key/value on small screens */
+  /* EPK table */
   .epk-key { display: block; padding-bottom: 4px; }
   .epk-table tr { display: flex; flex-direction: column; padding: 16px 0; }
-}
-
-@media (max-width: 900px) {
-  /* Already revealed — skip animation on mobile to avoid content disappearing */
-  .reveal,
-  .reveal-left,
-  .reveal-right,
-  .reveal-children {
-    opacity: 1;
-    transform: none;
-    transition: none;
-  }
-}
-
-@media (max-width: 900px) {
-  .reveal,
-  .reveal.revealed,
-  .reveal-left,
-  .reveal-left.revealed,
-  .reveal-right,
-  .reveal-right.revealed,
-  .reveal-children,
-  .reveal-children.revealed,
-  .reveal-children > * {
-    opacity: 1 !important;
-    transform: none !important;
-    transition: none !important;
-  }
 }
 
 
