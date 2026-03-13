@@ -1155,94 +1155,46 @@ footer {
    — All breakpoint overrides in one place for easy maintenance.
 ============================================================ */
 @media (max-width: 900px) {
-
-  /* --- DISABLE SCROLL REVEAL ON MOBILE --- */
-  .reveal, .reveal.revealed,
-  .reveal-left, .reveal-left.revealed,
-  .reveal-right, .reveal-right.revealed,
-  .reveal-children, .reveal-children.revealed,
-  .reveal-children > * {
-    opacity: 1 !important;
-    transform: none !important;
-    transition: none !important;
-  }
-
-  /* --- NAV --- */
   .nav,
   .nav.nav-scrolled { padding: 20px 24px; }
+
+  /* Nav links hidden on mobile — TODO: add hamburger menu */
   .nav-links { display: none; }
 
-  /* --- INDEX PAGE --- */
+  .featured-single-inner {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
   .hero-content { padding: 0 24px 80px; }
-  .featured-single { padding: 80px 24px; }
-  .featured-single-inner { grid-template-columns: 1fr; gap: 40px; }
-  .band-intro-section { padding: 80px 24px; }
-  .band-intro-body { font-size: 22px; }
-  .singles-section { padding: 80px 24px; }
-  .singles-grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); }
-  .tour-section { padding: 80px 24px; }
-  .tour-row { grid-template-columns: 100px 1fr; }
-  .tour-ticket { display: none; }
+
+  .singles-section,
+  .tour-section,
+  .featured-single,
+  .band-intro-section,
   .continent-section { padding: 80px 24px; }
 
-  /* --- FOOTER --- */
-  footer { padding: 48px 24px 32px; }
+  .tour-row { grid-template-columns: 100px 1fr; }
+  .tour-ticket { display: none; }
+
   .footer-top { flex-direction: column; gap: 32px; }
+  footer { padding: 48px 24px 32px; }
   .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
 
-  /* --- PAGE HERO --- */
+  /* Bio / press / contact pages */
   .page-hero { padding: 120px 24px 60px; }
   .page-hero::before { display: none; }
-  .page-hero-title { font-size: clamp(44px, 12vw, 80px); }
-
-  /* --- BIO / PRESS / CONTACT --- */
-  .bio-section { padding: 60px 24px; }
-  .two-col { display: block; width: 100%; }
-  .col-label { display: none; }
-  .bio-text p { font-size: 15px; }
-  .bio-text p:first-child { font-size: 17px; }
-  .members-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; width: 100%; }
-
-  /* --- PHOTO GALLERIES — horizontal swipe --- */
-  .photos-grid,
-  .press-photos-grid {
-    display: flex !important;
-    flex-direction: row !important;
-    overflow-x: auto !important;
-    scroll-snap-type: x mandatory !important;
-    -webkit-overflow-scrolling: touch !important;
-    gap: 8px !important;
-    width: 100% !important;
-    padding-bottom: 12px !important;
-    box-sizing: border-box !important;
-  }
-
-  /* Bio page — portrait photos */
-  .photos-grid .press-photo {
-    flex: 0 0 78vw !important;
-    width: 78vw !important;
-    aspect-ratio: 3/4 !important;
-    scroll-snap-align: center !important;
-  }
-
-  /* Press page — landscape photos */
-  .press-photos-grid .press-photo,
-  .press-photos-grid .press-photo:first-child {
-    flex: 0 0 85vw !important;
-    width: 85vw !important;
-    aspect-ratio: 4/3 !important;
-    scroll-snap-align: center !important;
-    grid-row: span 1 !important;
-  }
-
- 
+  .bio-section { padding: 80px 24px; }
+  .two-col { grid-template-columns: 1fr; gap: 32px; }
+  .col-label { position: static; }
+  .members-grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); }
+  .photos-grid { grid-template-columns: 1fr 1fr; }
+  .press-photo:first-child { grid-row: span 1; }
+}
 
 @media (max-width: 600px) {
-  .members-grid { grid-template-columns: 1fr; max-width: 320px; }
   .form-row { grid-template-columns: 1fr; }
   .form-submit { align-self: stretch; text-align: center; }
-  .epk-key { display: block; padding-bottom: 4px; }
-  .epk-table tr { display: flex; flex-direction: column; padding: 16px 0; }
 }
 
 
@@ -1856,4 +1808,40 @@ footer {
 .form-feedback--error {
   color: #c0604a;
   border-color: #c0604a;
+}
+/* ============================================================
+   MOBILE PHOTO GALLERIES — swipeable horizontal scroll
+============================================================ */
+@media (max-width: 900px) {
+  .photos-grid,
+  .press-photos-grid {
+    display: flex !important;
+    flex-direction: row !important;
+    overflow-x: auto !important;
+    scroll-snap-type: x mandatory !important;
+    -webkit-overflow-scrolling: touch !important;
+    gap: 8px !important;
+    width: 100% !important;
+    padding-bottom: 12px !important;
+    box-sizing: border-box !important;
+  }
+
+  .photos-grid .press-photo,
+  .press-photos-grid .press-photo,
+  .press-photos-grid .press-photo:first-child {
+    flex: 0 0 92vw !important;
+    width: 92vw !important;
+    aspect-ratio: 4/3 !important;
+    scroll-snap-align: center !important;
+    grid-row: span 1 !important;
+    min-width: 0 !important;
+  }
+
+  .photos-grid .press-photo img,
+  .press-photos-grid .press-photo img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    display: block !important;
+  }
 }
